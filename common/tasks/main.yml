@@ -1,0 +1,6 @@
+---
+- include: locale.yml
+  tags: locale
+
+- include: python2.yml
+  tags: python2

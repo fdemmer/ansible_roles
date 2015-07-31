@@ -1,0 +1,13 @@
+---
+- name: generate locale
+  command: /usr/sbin/locale-gen {{ locale }}
+
+- name: set locale
+  command: /usr/sbin/update-locale LANG={{ locale }} LC_ALL={{ locale }} LANGUAGE={{ language }}
+
+- name: set /etc/localtime
+  command: /bin/cp /usr/share/zoneinfo/{{ timezone }} /etc/localtime
+
+- name: set timezone (/etc/timezone)
+  template: src=timezone dest=/etc/timezone
+  notify: update tzdata

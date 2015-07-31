@@ -1,0 +1,9 @@
+---
+# python2 tasks
+# affects global/system python!
+
+- name: install python2 utilities
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - python-pip
+    - virtualenvwrapper
