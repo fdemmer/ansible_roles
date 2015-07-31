@@ -1,0 +1,4 @@
+---
+
+- include: redis.yml
+  tags: redis

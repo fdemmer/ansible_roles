@@ -1,0 +1,29 @@
+---
+# setup redis server
+
+- name: install redis-server
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - redis-server
+
+- name: configure redis-server host
+  lineinfile: >
+    dest=/etc/redis/redis.conf
+    regexp="^bind [0-9\.]+"
+    line="bind {{ redis_host }}"
+    backup=yes
+  notify: restart redis-server
+
+- name: configure redis-server port
+  lineinfile: >
+    dest=/etc/redis/redis.conf
+    regexp="^port [0-9]+"
+    line="port {{ redis_port }}"
+    backup=yes
+  notify: restart redis-server
+
+- name: enable redis-server
+  service: >
+    name=redis-server
+    state=started
+    enabled=yes
