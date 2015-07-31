@@ -1,0 +1,16 @@
+---
+# setup nginx server
+
+- name: install nginx
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - nginx
+
+- name: update nginx log directory
+  file: >
+    path="/var/log/nginx"
+    mode=0755
+    state=directory
+
+- name: enable nginx
+  service: name=nginx state=started enabled=yes
