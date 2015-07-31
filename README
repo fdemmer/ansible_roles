@@ -1,0 +1,35 @@
+About
+=====
+
+This is a collection of common ansible roles to use with vagrant or actual 
+deployments.
+
+
+Installation
+============
+
+Paths used in the following steps are recommendations.
+
+Clone the roles in this repository:
+
+    git clone <git repo> ~/.ansible/roles
+
+Make sure the ansible.cfg file in your project has the following setting:
+
+    [defaults]
+    roles_path = /etc/ansible/:~/.ansible/
+
+If not create a file ~/.ansible.cfg and add that line.
+
+
+Contributing
+============
+
+When modifying an existing role changes should be pushed to a feature
+branch for review. Only after compatibility of the changes has been tested
+in *all* projects using the role, it should be accepted into master.
+
+Specialized roles only suitable to a specific project should be kept in 
+the project repository.
+
+
