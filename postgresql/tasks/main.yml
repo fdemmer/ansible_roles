@@ -1,0 +1,10 @@
+---
+
+- include: postgresql.yml
+  tags: postgresql
+
+- include: postgis.yml
+  tags:
+    - postgresql
+    - postgis
+  when: install_postgis

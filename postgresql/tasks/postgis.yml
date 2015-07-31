@@ -1,0 +1,7 @@
+---
+
+- name: install postgis
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - postgis
+    - postgresql-9.3-postgis-scripts
