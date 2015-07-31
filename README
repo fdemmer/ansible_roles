@@ -17,7 +17,7 @@ Clone the roles in this repository:
 Make sure the ansible.cfg file in your project has the following setting:
 
     [defaults]
-    roles_path = /etc/ansible/:~/.ansible/
+    roles_path = /etc/ansible/roles/:~/.ansible/roles/
 
 If not create a file ~/.ansible.cfg and add that line.
 
