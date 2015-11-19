@@ -1,0 +1,26 @@
+[group:{{ service_name }}]
+programs = webapp{% if use_celery %}, worker{% endif %}
+
+[program:webapp]
+directory = {{ install_path }}
+command = {{ virtualenv_path }}/bin/gunicorn
+    -c {{ install_path }}/gunicorn.py
+    --log-file {{ service_log_path }}/%(group_name)s-%(program_name)s.log
+    wsgi:application
+user = {{ service_user }}
+stdout_logfile = {{ supervisor_log_path }}/%(group_name)s-%(program_name)s.log
+redirect_stderr = true
+
+{% if use_celery %}
+[program:worker]
+directory = {{ install_path }}
+command = {{ virtualenv_path }}/bin/celery worker
+    -A {{ service_name }}
+    -l {{ celery_worker_loglevel }}
+    -Q {{ celery_default_queue }}
+    -n %(group_name)s-worker
+    -B
+user = {{ service_user }}
+stdout_logfile = {{ supervisor_log_path }}/%(group_name)s-%(program_name)s.log
+redirect_stderr = true
+{% endif %}

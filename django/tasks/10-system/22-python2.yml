@@ -1,0 +1,12 @@
+---
+# prepare python2 and create a service virtualenv
+
+- name: install python2 headers
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - python-dev
+
+- name: create python2 virtualenv
+  command: virtualenv -p /usr/bin/python2 {{ virtualenv_path }}
+  args:
+    creates: "{{ virtualenv_path }}/bin/python2"

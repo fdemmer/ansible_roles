@@ -1,0 +1,12 @@
+---
+# prepare python3 and create a service virtualenv
+
+- name: install python3 headers
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - python3-dev
+
+- name: create python3 virtualenv
+  command: virtualenv -p /usr/bin/python3 {{ virtualenv_path }}
+  args:
+    creates: "{{ virtualenv_path }}/bin/python3"

@@ -1,0 +1,10 @@
+---
+
+- include: 10-supervisor.yml
+  tags: supervisor
+
+- include: 20-gunicorn.yml
+  tags: gunicorn
+
+- include: 90-nginx.yml
+  tags: nginx

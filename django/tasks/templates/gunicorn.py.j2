@@ -1,0 +1,7 @@
+import multiprocessing
+
+bind = '{{ gunicorn_host }}:{{ gunicorn_port }}'
+workers = {{ gunicorn_workers }}
+
+reload = {{ gunicorn_autoreload }}
+loglevel = '{{ gunicorn_loglevel }}'

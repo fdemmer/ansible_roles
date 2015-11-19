@@ -1,0 +1,11 @@
+---
+
+- name: install django app requirements
+  pip: >
+    virtualenv="{{ virtualenv_path }}"
+    executable="{{ virtualenv_path }}/bin/pip"
+    requirements="{{ install_path }}/requirements.txt"
+    state=latest
+  notify:
+    - restart service group
+  tags: update_requirements

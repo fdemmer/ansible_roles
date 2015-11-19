@@ -1,0 +1,10 @@
+---
+
+- include: database.yml
+  when: not disabled_by_default
+
+- include: media.yml
+  when: not disabled_by_default
+
+- include: supervisor.yml
+  when: not disabled_by_default

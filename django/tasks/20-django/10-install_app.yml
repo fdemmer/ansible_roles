@@ -1,0 +1,31 @@
+---
+- name: create webapps directory
+  file: >
+    path="{{ item }}"
+    owner={{ service_user }}
+    group={{ service_group }}
+    mode=0755
+    state=directory
+  with_items:
+    - "{{ webapps_path }}"
+
+- name: install django app
+  file: >
+    src={{ source_path }}
+    dest={{ install_path }}
+    owner={{ service_user }}
+    group={{ service_group }}
+    state=link
+  notify:
+    - restart service group
+
+- name: create static and media directories
+  file: >
+    path="{{ item }}"
+    owner={{ service_user }}
+    group={{ service_group }}
+    mode=0755
+    state=directory
+  with_items:
+    - "{{ static_path }}"
+    - "{{ media_path }}"

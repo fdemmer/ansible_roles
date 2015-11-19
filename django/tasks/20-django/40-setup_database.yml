@@ -1,0 +1,52 @@
+---
+# create database with user, run migrations and load sample data
+
+- name: drop database
+  sudo_user: postgres
+  postgresql_db: >
+    name={{ db_name }}
+    state=absent
+  when: not disabled_by_default
+  tags: drop_database
+
+- name: create database
+  sudo_user: postgres
+  postgresql_db: >
+    name={{ db_name }}
+    template='template0'
+    state=present
+  when: install_postgresql
+  tags: create_database
+
+- name: enable spatial extensions
+  sudo_user: postgres
+  postgresql_ext: name={{ item }} db={{ db_name }}
+  with_items:
+    - postgis
+    #- postgis_topology
+  when: install_postgresql and enable_postgis
+  tags: create_database
+
+- name: create database user
+  sudo_user: postgres
+  postgresql_user: >
+    db={{ db_name }}
+    name={{ db_user }}
+    password={{ db_password }}
+    priv=ALL
+    role_attr_flags=INHERIT,CREATEDB,SUPERUSER
+  when: install_postgresql
+  tags: create_database
+
+- name: configure pgpass
+  sudo_user: "{{ service_user }}"
+  lineinfile: >
+    dest="~/.pgpass"
+    line="localhost:*:{{ db_name }}:{{ db_user }}:{{ db_password }}"
+    owner={{ service_user }}
+    group={{ service_group }}
+    mode=0600
+    state=present
+    create=yes
+  when: install_postgresql
+  tags: create_database

@@ -1,0 +1,17 @@
+---
+# dependencies on other, external roles
+
+dependencies:
+  # process management
+  - role: supervisor
+
+  # webservers
+  - role: nginx
+
+  # databases
+  - role: postgresql
+    when: install_postgresql
+  - role: mysql
+    when: install_mysql
+  - role: redis
+    when: install_redis

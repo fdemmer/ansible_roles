@@ -1,0 +1,31 @@
+---
+
+- name: create new database dump
+  sudo: False
+  #local_action: shell ssh {{ live_db_host }} "pg_dump -F t -O -U {{ live_db_user }} {{ live_db_name }} | gzip -c > {{ remote_tempfile }}"
+  local_action: shell ssh {{ live_host_user }}@{{ live_db_host }} "pg_dump -Fc -f {{ remote_tempfile }} -O -U {{ live_db_user }} {{ live_db_name }}"
+  tags:
+    - create_dump
+    - import_database
+
+- name: download database dump
+  sudo: False
+  local_action: shell scp -q {{ live_host_user }}@{{ live_db_host }}:{{ remote_tempfile }} {{ local_tempfile }}
+  tags:
+    - download_dump
+    - import_database
+
+- name: copy database dump to remote
+  copy: >
+    src={{ local_tempfile }}
+    dest={{ target_tempfile }}
+  tags:
+    - download_dump
+    - import_database
+
+- name: restore database dump
+  sudo: False
+  command: pg_restore -O -h {{ db_host }} -U {{ db_user }} -d {{ db_name }} {{ target_tempfile }}
+  tags:
+    - restore_dump
+    - import_database

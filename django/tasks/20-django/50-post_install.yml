@@ -1,0 +1,22 @@
+---
+
+- name: run migrations
+  django_manage: >
+    command=migrate
+    app_path={{ install_path }}
+    virtualenv={{ virtualenv_path }}
+  tags: django_migrate
+
+- name: collect static files
+  django_manage: >
+    command="collectstatic"
+    app_path={{ install_path }}
+    virtualenv={{ virtualenv_path }}
+  tags: django_collectstatic
+
+- name: compile messages
+  django_manage: >
+    command="compilemessages"
+    app_path={{ install_path }}
+    virtualenv={{ virtualenv_path }}
+  tags: django_compilemessages

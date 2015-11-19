@@ -1,0 +1,34 @@
+---
+# choose python version and setup a service virtualenv
+
+- include: 22-python2.yml
+  when: not use_python3
+
+- include: 23-python3.yml
+  when: use_python3
+
+- name: update virtualenv owner
+  file: >
+    path={{ venvs_path }}
+    owner={{ service_user }}
+    group={{ service_group }}
+    recurse=yes
+
+- name: configure virtualenv directory
+  lineinfile: >
+    dest=/etc/environment
+    regexp=^WORKON_HOME={{ venvs_path }}
+    line=WORKON_HOME={{ venvs_path }}
+    state=present
+
+- name: enable virtualenv on login
+  lineinfile: >
+    dest=/home/{{ service_user }}/.bashrc
+    line="source {{ virtualenv_path }}/bin/activate"
+    state=present
+
+- name: go to /vagrant after login
+  lineinfile: >
+    dest=/home/{{ service_user }}/.bashrc
+    line="cd /vagrant"
+    state=present

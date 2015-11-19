@@ -1,0 +1,14 @@
+---
+# process handlers
+
+- name: stop service group
+  supervisorctl: name="{{ service_name }}:*" state=stopped
+
+- name: restart service group
+  supervisorctl: name="{{ service_name }}:*" state=restarted
+
+- name: restart webapp
+  supervisorctl: name="{{ service_name }}:webapp" state=restarted
+
+- name: restart worker
+  supervisorctl: name="{{ service_name }}:worker" state=restarted

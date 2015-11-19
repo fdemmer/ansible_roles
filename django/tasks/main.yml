@@ -1,0 +1,15 @@
+---
+# tasks to setup a django service in a new virtualenv, install gunicorn as
+# application server and configure supervisor to run it
+
+- include: 10-system/main.yml
+  tags: deploy
+
+- include: 20-django/main.yml
+  tags: deploy
+
+- include: 50-server/main.yml
+  tags: deploy
+
+- include: 90-commands/main.yml
+  when: not disabled_by_default

@@ -1,0 +1,75 @@
+Ansible Role: Django
+====================
+
+Commands
+--------
+
+By setting the variable "disabled_by_default" to false some tasks are
+disabled by default.
+
+They can be run one by one using their tags and the following command
+or simply by using "provision_tag.sh":
+
+    ansible-playbook \
+        --private-key=.vagrant/machines/default/virtualbox/private_key \
+        -i provisioning/inventory \
+        -l vagrant \
+        -u vagrant \
+        --tags="$1" \
+        --extra-vars '{"disabled_by_default": false}' \
+        -vvvv \
+        provisioning/site.yml
+
+
+Restoring a database dump
+-------------------------
+
+After provisioning, delete and recreate the database without running migrations
+or loading fixtures (no space between tags!):
+
+    ./provisioning/scripts/provision_tag.sh drop_database,create_database
+
+Then inside the box load the database dump:
+
+    vagrant ssh
+    ./manage.py dbshell < dump.sql
+
+For easier local use I recommend resetting the admin password:
+
+    ./manage.py changepassword admin
+
+
+Importing a live database dump
+------------------------------
+
+The drop_database, create_database and import_database tags delete the current
+database in the box and create an empty one. Then a fresh database dump will be
+created on the production system, downloaded into the box and imported into the
+empty database.
+
+    ./provisioning/scripts/provision_tag.sh \
+        drop_database,create_database,import_database
+
+
+Other tags...
+-------------
+
+Useful tags to run one-off tasks in this role:
+
+- update_requirements:
+  update packages in the project's virtualenv from current requirements.txt
+
+- django_migrate
+  run manage.py migrate
+
+- django_collectstatic
+  run manage.py collectstatic
+
+- django_compilemessages
+  run manage.py compilemessages
+
+- stop_webapp:
+  stop the webapp app via supervisor
+
+- start_webapp
+  (re)start the webapp via supervisor

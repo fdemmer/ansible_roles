@@ -1,0 +1,34 @@
+---
+
+- name: generate new secret key
+  command: makepasswd
+    --string=abcdefghijklmnopqrstuvwxyz0123456789\@\%\^\&\*\(\-\_\=\+\)
+    --chars=50
+  register: _
+- set_fact: django_secret_key="{{_.stdout}}"
+
+- name: determine database engine
+  set_fact: db_engine="{{ db_engine_postgis }}"
+  when: enable_postgis
+
+- name: configure django app
+  template: >
+    src="settings/secret.py.j2"
+    dest="{{ install_path }}/{{ service_name }}/{{ secret_settings }}"
+    owner={{ service_user }}
+    group={{ service_group }}
+    mode=0644
+    backup=yes
+  notify:
+    - restart service group
+
+- name: configure django local settings
+  template: >
+    src="settings/local.py.j2"
+    dest="{{ install_path }}/{{ service_name }}/{{ local_settings }}"
+    owner={{ service_user }}
+    group={{ service_group }}
+    mode=0644
+    backup=yes
+  notify:
+    - restart service group

@@ -1,0 +1,33 @@
+---
+# install required tools and system wide libraries
+
+- name: install utilities
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    # required to generate secret key
+    - makepasswd
+    # required for make/compilemessages
+    - gettext
+
+- name: install library headers for pillow
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - libjpeg-dev
+    - libtiff-dev
+    - zlib1g-dev
+    - libfreetype6-dev
+    - liblcms2-dev
+  when: support_pillow
+
+- name: install library headers for lxml
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - libxml2-dev
+    - libxslt1-dev
+  when: support_lxml
+
+- name: install library headers for mysql
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - libmysqlclient-dev
+  when: support_mysql

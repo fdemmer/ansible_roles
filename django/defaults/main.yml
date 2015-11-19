@@ -1,0 +1,133 @@
+---
+
+### basic settings, role internal configuration
+
+### internal
+# switch to disable one-off tasks by default
+# use provision_tag.sh script to run those tasks
+disabled_by_default: True
+
+### service or site name
+# used as default for a number of things, eg. venv, install dir, hostname, ...
+# override this in you playbook for the service/site
+service_name: "service"
+
+
+### system configuration, library, service, ... feature switches
+
+# use python3 instead of python2, which is default
+use_python3: False
+
+## service/server feature flags
+# install and setup postgres database server
+install_postgresql: False
+# install redis server
+install_redis: False
+# install mysql server
+install_mysql: False
+
+## other service related feature flags
+# enable postgix support in the created database and django settings
+enable_postgis: False
+
+## library/dependency feature flags
+# install image processing libraries
+support_pillow: False
+# install lxml headers
+support_lxml: False
+# install mysql client headers (not a databse server!)
+support_mysql: False
+
+
+### directory structure, filesystem layout
+
+# used for logs and virtualenv owner
+service_user: "root"
+service_group: "root"
+
+# path to code root, where the django site module lives
+source_path: "/vagrant"
+
+venvs_path: "/var/virtualenvs"
+virtualenv_path: "{{ venvs_path }}/{{ service_name }}"
+
+webapps_path: "/var/www"
+install_path: "{{ webapps_path }}/{{ service_name }}"
+static_path: "{{ webapps_path }}/public/static"
+media_path: "{{ webapps_path }}/public/media"
+
+log_path: "/var/log"
+service_log_path: "{{ log_path }}/gunicorn"
+supervisor_log_path: "{{ log_path }}/supervisor"
+
+
+### service configuration, other than django
+
+# dangerous defaults, use only in development
+nginx_autoindex_static_path: "on"
+nginx_autoindex_media_path: "on"
+
+# gunicorn
+gunicorn_host: "0.0.0.0"
+gunicorn_port: "8000"
+gunicorn_loglevel: "debug"
+gunicorn_autoreload: "True"
+gunicorn_workers: "multiprocessing.cpu_count() * 2 + 1"
+
+
+### django related switches
+
+# project uses celery tasks, configure worker
+use_celery: False
+
+# use redis for caching instead of LocMemCache
+use_redis_cache: False
+
+# load django fixtures into database
+load_fixtures: False
+fixture_labels: ""
+
+
+### django and celery settings
+
+# settings structure, used on top of {{ install_path }}/{{ service_name }}
+secret_settings: "settings/secret.py"
+local_settings: "settings/local.py"
+
+# local/machine dependent settings
+db_engine_default: "django.db.backends.postgresql_psycopg2"
+db_engine_postgis: "django.contrib.gis.db.backends.postgis"
+
+db_engine: "{{ db_engine_default }}"
+db_name: "{{ service_name }}"
+db_user: "{{ service_name }}"
+db_password: "{{ service_name }}"
+db_host: "localhost"
+db_port: ""
+
+cache_backend: "django.core.cache.backends.locmem.LocMemCache"
+cache_location: "unique-snowflake"
+
+# celery
+celery_broker_url: ""
+celery_result_backend: ""
+
+celery_worker_loglevel: "debug"
+celery_default_queue: "{{ service_name }}"
+
+
+### settings for the commands tasks
+
+live_host: ""
+live_host_user: ""
+
+live_db_host: "{{ live_host }}"
+live_db_user: ""
+live_db_name: ""
+
+remote_media_path: ""
+
+tempfile: "/tmp/data.pgdump"
+remote_tempfile: "{{ tempfile }}"
+local_tempfile: "{{ tempfile }}"
+target_tempfile: "{{ tempfile }}"

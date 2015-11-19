@@ -1,0 +1,20 @@
+---
+# install application sources and configure local settings
+
+- include: 10-install_app.yml
+  tags: install_app
+
+- include: 20-update_settings.yml
+  tags: update_settings
+
+- include: 30-update_virtualenv.yml
+  tags: update_virtualenv
+
+- include: 40-setup_database.yml
+  tags: setup_database
+
+- include: 50-post_install.yml
+  tags: post_install
+
+- include: 90-fixtures.yml
+  tags: fixtures

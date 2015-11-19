@@ -1,0 +1,17 @@
+---
+
+- name: load superuser fixture
+  django_manage: >
+    command="loaddata superuser"
+    app_path={{ install_path }}
+    virtualenv={{ virtualenv_path }}
+  when: load_fixtures
+  tags: load_fixtures
+
+- name: load other configured fixture
+  django_manage: >
+    command="loaddata {{ fixture_labels }}"
+    app_path={{ install_path }}
+    virtualenv={{ virtualenv_path }}
+  when: load_fixtures and fixture_labels
+  tags: load_fixtures

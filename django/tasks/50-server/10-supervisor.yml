@@ -1,0 +1,19 @@
+---
+# setup the django service in supervisor
+
+- name: create service log directory
+  file: path="{{ service_log_path }}"
+        owner={{ service_user }}
+        group={{ service_group }}
+        mode=0755
+        state=directory
+
+- name: configure service in supervisor
+  template: >
+    src="supervisor/service_group.conf.j2"
+    dest="/etc/supervisor/conf.d/{{ service_name }}.conf"
+    backup=yes
+  notify:
+    - supervisor reread
+    - supervisor update
+    - restart service group
