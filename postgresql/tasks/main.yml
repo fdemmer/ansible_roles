@@ -7,4 +7,4 @@
   tags:
     - postgresql
     - postgis
-  when: install_postgis
+  when: enable_postgis
