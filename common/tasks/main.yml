@@ -4,3 +4,6 @@
 
 - include: python2.yml
   tags: python2
+
+- include: services.yml
+  tags: services

@@ -1,0 +1,16 @@
+---
+# disable some service we dont need
+
+- name: disable puppet agent
+  service: >
+    name=puppet
+    state=stopped
+    enabled=no
+  when: disable_puppet
+
+- name: disable chef client
+  service: >
+    name=chef-client
+    state=stopped
+    enabled=no
+  when: disable_chef
