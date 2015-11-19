@@ -1,0 +1,11 @@
+---
+# setup mysql server
+
+- name: install mysql
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - mysql-server-5.5
+    - libmysqlclient-dev
+
+- name: enable mysql
+  service: name=mysql state=started enabled=yes
