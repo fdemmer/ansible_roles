@@ -83,6 +83,9 @@ use_celery: False
 # use redis for caching instead of LocMemCache
 use_redis_cache: False
 
+# project uses reversion, run createinitialrevisions
+use_reversion: False
+
 # load django fixtures into database
 load_fixtures: False
 fixture_labels: ""

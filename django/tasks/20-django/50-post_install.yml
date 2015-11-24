@@ -20,3 +20,11 @@
     app_path={{ install_path }}
     virtualenv={{ virtualenv_path }}
   tags: django_compilemessages
+
+- name: create initial revisions for reversion
+  django_manage: >
+    command="createinitialrevisions"
+    app_path={{ install_path }}
+    virtualenv={{ virtualenv_path }}
+  tags: django_initialrevisions
+  when: use_reversion
