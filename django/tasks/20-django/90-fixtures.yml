@@ -5,7 +5,7 @@
     command="loaddata superuser"
     app_path={{ install_path }}
     virtualenv={{ virtualenv_path }}
-  when: load_fixtures
+  when: load_fixtures and fixture_superuser
   tags: load_fixtures
 
 - name: load other configured fixture
