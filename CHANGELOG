@@ -1,5 +1,9 @@
 # Change log
 
+# 2015-11-18
+- add django role
+- merge utilities role into django role
+
 ## 2015-07-31
 - initial commit
 - add template
