@@ -15,3 +15,9 @@
     virtualenv={{ virtualenv_path }}
   when: load_fixtures and fixture_labels
   tags: load_fixtures
+
+- name: copy initial media
+  shell: >
+    rsync -av {{ source_media_path }}/ {{ media_path }}/
+  when: load_fixtures
+  tags: load_fixtures

@@ -47,6 +47,7 @@ service_group: "root"
 
 # path to code root, where the django site module lives
 source_path: "/vagrant"
+source_media_path: "{{ source_path }}/public/media"
 
 venvs_path: "/var/virtualenvs"
 virtualenv_path: "{{ venvs_path }}/{{ service_name }}"
