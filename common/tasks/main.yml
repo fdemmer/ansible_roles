@@ -7,3 +7,7 @@
 
 - include: services.yml
   tags: services
+
+- include: swap.yml
+  tags: swap
+  when: enable_swap and swap_size > 0

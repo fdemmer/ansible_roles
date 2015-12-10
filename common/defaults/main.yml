@@ -5,3 +5,6 @@ timezone: 'Europe/Vienna'
 
 disable_chef: True
 disable_puppet: True
+
+enable_swap: True
+swap_size: 512
