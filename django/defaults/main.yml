@@ -73,7 +73,7 @@ gunicorn_host: "0.0.0.0"
 gunicorn_port: "8000"
 gunicorn_loglevel: "debug"
 gunicorn_autoreload: "True"
-gunicorn_workers: "multiprocessing.cpu_count() * 2 + 1"
+gunicorn_workers: 1
 
 
 ### django related switches
