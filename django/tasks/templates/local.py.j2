@@ -44,3 +44,20 @@ BROKER_URL = '{{ celery_broker_url }}'
 CELERY_RESULT_BACKEND = '{{ celery_result_backend }}'
 CELERY_DEFAULT_QUEUE = '{{ celery_default_queue }}'
 {% endif %}
+
+{% if use_sentry %}
+RAVEN_CONFIG = {
+    'dsn': 'https://{{ sentry_key }}:{{ sentry_secret }}@{{ sentry_host }}/{{ sentry_project }}',
+}
+
+LOGGING['root'].update({
+    'level': 'WARNING',
+    'handlers': ['sentry'],
+})
+LOGGING['handlers'].update({
+    'sentry': {
+        'level': 'ERROR',
+        'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+    },
+})
+{% endif %}

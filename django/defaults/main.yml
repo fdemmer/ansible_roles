@@ -122,6 +122,9 @@ requirement_files: ["base", "dev"]
 # requirements file to install in virtualenv
 requirements: "requirements.txt"
 
+# project uses sentry, adds configuration
+use_sentry: False
+
 # load django fixtures into database
 load_fixtures: False
 fixture_labels: "superuser"
@@ -161,6 +164,12 @@ celery_result_backend: ""
 
 celery_worker_loglevel: "debug"
 celery_default_queue: "{{ service_name }}"
+
+# sentry
+sentry_host: ""
+sentry_key: ""
+sentry_secret: ""
+sentry_project: "{{ service_name }}"
 
 # additional list of key/value pairs to add to secret.py
 more_secrets: []
