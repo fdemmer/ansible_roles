@@ -8,7 +8,7 @@
   when: load_fixtures and fixture_superuser
   tags: load_fixtures
 
-- name: load other configured fixture
+- name: load other configured fixtures
   django_manage: >
     command="loaddata {{ fixture_labels }}"
     app_path={{ install_path }}
