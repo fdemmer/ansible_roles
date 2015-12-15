@@ -8,3 +8,4 @@ disable_puppet: True
 
 enable_swap: True
 swap_size: 512
+swap_location: '/mnt/swap'
