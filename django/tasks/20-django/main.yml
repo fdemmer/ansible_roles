@@ -4,11 +4,11 @@
 - include: 10-install_app.yml
   tags: install_app
 
-- include: 20-update_settings.yml
-  tags: update_settings
-
-- include: 30-update_virtualenv.yml
+- include: 20-update_virtualenv.yml
   tags: update_virtualenv
+
+- include: 30-update_settings.yml
+  tags: update_settings
 
 - include: 40-setup_database.yml
   tags: setup_database
