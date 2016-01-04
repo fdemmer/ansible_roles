@@ -23,12 +23,12 @@
 
 - name: enable virtualenv on login
   lineinfile: >
-    dest=/home/{{ service_user }}/.bashrc
+    dest="~{{ service_user }}/.bashrc"
     line="source {{ virtualenv_path }}/bin/activate"
     state=present
 
 - name: go to /vagrant after login
   lineinfile: >
-    dest=/home/{{ service_user }}/.bashrc
+    dest="~{{ service_user }}/.bashrc"
     line="cd /vagrant"
     state=present
