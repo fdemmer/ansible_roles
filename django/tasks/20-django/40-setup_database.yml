@@ -38,7 +38,7 @@
   when: install_postgresql
   tags: create_database
 
-- name: configure pgpass
+- name: configure pgpass for {{ service_user }}
   sudo_user: "{{ service_user }}"
   lineinfile: >
     dest="~/.pgpass"
