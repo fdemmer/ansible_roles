@@ -27,8 +27,8 @@
     line="source {{ virtualenv_path }}/bin/activate"
     state=present
 
-- name: go to /vagrant after login
+- name: go to {{ source_path }} after login
   lineinfile: >
     dest="~{{ service_user }}/.bashrc"
-    line="cd /vagrant"
+    line="cd {{ source_path }}"
     state=present
