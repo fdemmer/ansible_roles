@@ -31,3 +31,9 @@
   with_items:
     - libmysqlclient-dev
   when: support_mysql
+
+- name: install library headers for cffi support
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - libffi-dev
+  when: support_cffi
