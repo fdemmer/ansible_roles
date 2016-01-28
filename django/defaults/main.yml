@@ -91,7 +91,7 @@ use_reversion: False
 
 # load django fixtures into database
 load_fixtures: False
-fixture_labels: ""
+fixture_labels: "superuser"
 
 
 ### django and celery settings
