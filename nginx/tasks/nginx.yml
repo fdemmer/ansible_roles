@@ -1,6 +1,10 @@
 ---
 # setup nginx server
 
+- name: add ppa:nginx/development
+  apt_repository: repo='ppa:nginx/development'
+  when: nginx_version_dev
+
 - name: install nginx
   apt: name={{ item }} state=latest update_cache=yes
   with_items:

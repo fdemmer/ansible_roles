@@ -7,6 +7,17 @@
     state=absent
   notify: restart nginx
 
+- name: install self signed cartificate and key
+  copy: >
+    src="{{ item }}"
+    dest="/etc/nginx/{{ item }}"
+    owner={{ service_user }}
+    group={{ service_group }}
+    mode=0644
+  with_items:
+    - "nginx.key"
+    - "nginx.crt"
+
 - name: configure nginx django/gunicorn site
   template: >
     src="nginx.conf.j2"
