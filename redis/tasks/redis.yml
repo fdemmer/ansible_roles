@@ -1,6 +1,10 @@
 ---
 # setup redis server
 
+- name: add ppa:chris-lea/redis-server
+  apt_repository: repo='ppa:chris-lea/redis-server'
+  when: redis_version_latest
+
 - name: install redis-server
   apt: name={{ item }} state=latest update_cache=yes
   with_items:
