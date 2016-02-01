@@ -166,10 +166,14 @@ celery_worker_loglevel: "debug"
 celery_default_queue: "{{ service_name }}"
 
 # sentry
-sentry_host: ""
-sentry_key: ""
-sentry_secret: ""
-sentry_project: "{{ service_name }}"
+
+sentry_protocol: "http://"
+sentry_host: "10.10.10.10:9000"
+sentry_project: "0"
+sentry_public_key: "foo"
+sentry_secret_key: "bar"
+sentry_site: "localhost"
+sentry_name: "{{ service_name }}"
 
 # additional list of key/value pairs to add to secret.py
 more_secrets: []
