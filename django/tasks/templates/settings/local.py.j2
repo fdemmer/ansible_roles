@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # machine dependent settings
+from __future__ import absolute_import
+from .base import *
+
 
 STATIC_ROOT = '{{ static_path }}'
 MEDIA_ROOT = '{{ media_path }}'
@@ -9,7 +12,7 @@ DATABASES = {
         'ENGINE': '{{ db_engine }}',
         'NAME': '{{ db_name }}',
         'USER': '{{ db_user }}',
-        'PASSWORD': '{{ db_password }}',
+        'PASSWORD': DATABASE_PASSWORD,
         'HOST': '{{ db_host }}',
         'PORT': '{{ db_port }}',
     },
