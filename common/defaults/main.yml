@@ -1,4 +1,6 @@
 ---
+service_name: "service"
+
 locale: 'en_US.UTF-8'
 language: 'en_US:en'
 timezone: 'Europe/Vienna'

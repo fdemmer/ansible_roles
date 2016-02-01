@@ -1,4 +1,6 @@
 ---
+- include: 00-host.yml
+
 - include: 10-locale.yml
   tags: locale
 

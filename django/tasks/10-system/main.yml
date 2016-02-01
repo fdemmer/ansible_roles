@@ -1,5 +1,4 @@
 ---
 
-- include: 00-host.yml
 - include: 10-requirements.yml
 - include: 20-virtualenv.yml
