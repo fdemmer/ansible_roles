@@ -109,6 +109,9 @@ use_postgresql: False
 # project uses celery tasks, configure worker
 use_celery: False
 
+# project uses sentry, adds configuration
+use_sentry: False
+
 # use redis for caching instead of LocMemCache
 use_redis_cache: False
 
@@ -121,9 +124,6 @@ requirement_files: ["base", "dev"]
 
 # requirements file to install in virtualenv
 requirements: "requirements.txt"
-
-# project uses sentry, adds configuration
-use_sentry: False
 
 # load django fixtures into database
 load_fixtures: False
