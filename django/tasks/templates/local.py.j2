@@ -56,12 +56,12 @@ RAVEN_CONFIG = {
 }
 
 LOGGING['root'].update({
-    'level': 'WARNING',
-    'handlers': ['sentry'],
+    'level': 'DEBUG',
+    'handlers': ['sentry', 'console'],
 })
 LOGGING['handlers'].update({
     'sentry': {
-        'level': 'ERROR',
+        'level': 'WARNING',
         'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
     },
 })
