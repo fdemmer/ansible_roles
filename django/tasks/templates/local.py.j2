@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 from __future__ import absolute_import
 from .base import *
+{% if use_sentry %}from .base import __version__{% endif %}
 
 try:
     from .project import *
@@ -47,7 +48,11 @@ CELERY_DEFAULT_QUEUE = '{{ celery_default_queue }}'
 
 {% if use_sentry %}
 RAVEN_CONFIG = {
-    'dsn': 'https://{{ sentry_key }}:{{ sentry_secret }}@{{ sentry_host }}/{{ sentry_project }}',
+    'dsn': '{{ sentry_protocol }}{}:{}@{{ sentry_host }}/{{ sentry_project }}'.format(
+        RAVEN_CONFIG_PUBLIC_KEY, RAVEN_CONFIG_SECRET_KEY),
+    'site': '{{ sentry_site }}',
+    'name': '{{ sentry_name }}',
+    'release': __version__,
 }
 
 LOGGING['root'].update({
