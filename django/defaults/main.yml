@@ -35,7 +35,7 @@ enable_postgis: False
 support_pillow: False
 # install lxml headers
 support_lxml: False
-# install mysql client headers (not a databse server!)
+# install mysql client headers (not a database server!)
 support_mysql: False
 # install support for CFFI
 support_cffi: True

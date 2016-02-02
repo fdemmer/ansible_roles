@@ -1,13 +1,13 @@
 ---
-  - name: register swap var
+  - name: register swap_file variable
     stat: path={{ swap_location }}
     register: swap_file
 
-  - name: create the file to be used for swap
+  - name: create swap file
     command: fallocate -l {{ swap_size }}M {{ swap_location }}
     when: swap_file.stat.exists == False
 
-  - name: format the file for swap
+  - name: format swap file
     command: mkswap {{ swap_location }}
     when: swap_file.stat.exists == False
 
@@ -19,7 +19,7 @@
     command: swapon {{ swap_location }}
     when: swap_file.stat.exists == False
 
-  - name: add swap file to /etc/fstab
+  - name: add swap file to fstab
     lineinfile: dest=/etc/fstab line="{{ swap_location }}   none    swap    sw    0   0" state=present
     when: swap_file.stat.exists == True
 
