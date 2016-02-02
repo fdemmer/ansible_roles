@@ -2,6 +2,9 @@
 # dependencies on other, external roles
 
 dependencies:
+  # prepare python environment
+  - role: bootstrap_python
+
   # process management
   - role: supervisor
 

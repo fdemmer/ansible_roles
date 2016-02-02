@@ -1,0 +1,36 @@
+---
+### basic settings, role internal configuration
+
+### service or site name
+# used as default for a number of things, eg. venv, install dir, hostname, ...
+# override this in you playbook for the service/site
+service_name: "service"
+
+
+### system configuration, library, service, ... feature switches
+
+# use python3 instead of python2, which is default
+use_python3: False
+
+## library/dependency feature flags
+# install image processing libraries
+support_pillow: False
+# install lxml headers
+support_lxml: False
+# install mysql client headers (not a database server!)
+support_mysql: False
+# install support for CFFI
+support_cffi: True
+
+
+### directory structure, filesystem layout
+
+# used for logs and virtualenv owner
+service_user: "root"
+service_group: "root"
+
+# path to code root, where the django site module lives
+source_path: "/vagrant"
+
+venvs_path: "/var/virtualenvs"
+virtualenv_path: "{{ venvs_path }}/{{ service_name }}"
