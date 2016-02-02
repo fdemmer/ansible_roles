@@ -13,6 +13,8 @@ service_name: "service"
 use_python3: False
 
 ## library/dependency feature flags
+# install gettext and makepasswd
+support_django: True
 # install image processing libraries
 support_pillow: False
 # install lxml headers

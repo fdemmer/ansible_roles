@@ -8,6 +8,7 @@
     - makepasswd
     # required for make/compilemessages
     - gettext
+  when: support_django
 
 - name: install library headers for pillow
   apt: name={{ item }} state=latest update_cache=yes
