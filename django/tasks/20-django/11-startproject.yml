@@ -14,7 +14,7 @@
 
 - name: make manage.py executeable
   file: >
-    path="{{ install_path }}/manage.py"
+    path="{{ source_path }}/manage.py"
     owner={{ service_user }}
     group={{ service_group }}
     mode=0755
