@@ -12,6 +12,7 @@ except ImportError:
 STATIC_ROOT = '{{ static_path }}'
 MEDIA_ROOT = '{{ media_path }}'
 
+{% if use_postgresql %}
 DATABASES = {
     'default': {
         'ENGINE': '{{ db_engine }}',
@@ -22,6 +23,7 @@ DATABASES = {
         'PORT': '{{ db_port }}',
     },
 }
+{% endif %}
 
 CACHES = {
     'default': {

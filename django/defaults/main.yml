@@ -15,7 +15,7 @@ service_name: "service"
 ### system configuration, library, service, ... feature switches
 
 ## service/server feature flags
-# install and setup postgres database server
+# install postgres database server
 install_postgresql: False
 # install redis server
 install_redis: False
@@ -68,6 +68,9 @@ gunicorn_workers: 1
 
 # when creating a new project, use this template
 django_project_template: https://github.com/fdemmer/django_project_template/archive/master.zip
+
+# project uses postgresql as database, configure access
+use_postgresql: False
 
 # project uses celery tasks, configure worker
 use_celery: False

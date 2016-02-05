@@ -15,7 +15,7 @@
     name={{ db_name }}
     template='template0'
     state=present
-  when: install_postgresql
+  when: use_postgresql
   tags: create_database
 
 - name: enable spatial extensions
@@ -24,7 +24,7 @@
   with_items:
     - postgis
     #- postgis_topology
-  when: install_postgresql and enable_postgis
+  when: use_postgresql and enable_postgis
   tags: create_database
 
 - name: create database user
@@ -35,7 +35,7 @@
     password={{ db_password }}
     priv=ALL
     role_attr_flags=INHERIT,CREATEDB,SUPERUSER
-  when: install_postgresql
+  when: use_postgresql
   tags: create_database
 
 - name: configure pgpass for {{ service_user }}
@@ -48,5 +48,5 @@
     mode=0600
     state=present
     create=yes
-  when: install_postgresql
+  when: use_postgresql
   tags: create_database
