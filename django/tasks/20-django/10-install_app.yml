@@ -1,5 +1,23 @@
 ---
-- name: install django app
+
+- name: register source_path_service variable
+  stat: path="{{ source_path }}/{{ service_name }}"
+  register: source_path_service
+
+- name: install django to create new project
+  pip: >
+    virtualenv="{{ virtualenv_path }}"
+    executable="{{ virtualenv_path }}/bin/pip"
+    name="Django"
+    state=latest
+  when: source_path_service.stat.exists == False
+
+- name: create new django project from template
+  shell: >
+    {{ virtualenv_path }}/bin/python -m django startproject --template={{ django_project_template }} {{ service_name }} {{ source_path }}
+  when: source_path_service.stat.exists == False
+
+- name: link django project in /vagrant dir
   file: >
     src={{ source_path }}
     dest={{ install_path }}
