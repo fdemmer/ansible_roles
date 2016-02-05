@@ -3,6 +3,11 @@
 from __future__ import absolute_import
 from .base import *
 
+try:
+    from .project import *
+except ImportError:
+    pass
+
 
 STATIC_ROOT = '{{ static_path }}'
 MEDIA_ROOT = '{{ media_path }}'
