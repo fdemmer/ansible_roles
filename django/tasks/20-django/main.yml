@@ -1,6 +1,9 @@
 ---
 # install application sources and configure local settings
 
+- include: 00-directories.yml
+  tags: install_app
+
 - include: 10-install_app.yml
   tags: install_app
 
