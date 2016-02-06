@@ -11,7 +11,7 @@
   set_fact: db_engine="{{ db_engine_postgis }}"
   when: enable_postgis
 
-- name: configure django app
+- name: configure django secret settings
   template: >
     src="settings/secret.py.j2"
     dest="{{ install_path }}/{{ service_name }}/{{ secret_settings }}"
