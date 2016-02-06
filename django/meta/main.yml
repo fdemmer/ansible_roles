@@ -3,7 +3,7 @@
 
 dependencies:
   # prepare python environment
-  - role: bootstrap_python
+  - role: python
 
   # process management
   - role: supervisor
