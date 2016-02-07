@@ -1,4 +1,31 @@
 ---
+# install all requirements from requirements.txt
+#
+# use_pip_compile == True:
+#   before installing requirements.txt, install pip-tools and recompile 
+#   requirements inputs configured in requirement_files
+#
+# tag: update_requirements
+#
+
+- name: install pip-tools
+  pip: >
+    virtualenv="{{ virtualenv_path }}"
+    executable="{{ virtualenv_path }}/bin/pip"
+    name={{ item }}
+    state=latest
+  with_items:
+    - "pip"
+    - "pip-tools"
+  when: use_pip_compile
+  tags: update_requirements
+
+- name: recompile requirements input
+  command: >
+    {{ virtualenv_path }}/bin/pip-compile {{ install_path }}/requirements/{{ item }}.in
+  with_items: requirement_files
+  when: use_pip_compile
+  tags: update_requirements
 
 - name: install django app requirements
   pip: >

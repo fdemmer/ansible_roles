@@ -81,6 +81,10 @@ use_redis_cache: False
 # project uses reversion, run createinitialrevisions
 use_reversion: False
 
+# use pip-compile to generate requirements files
+use_pip_compile: False
+requirement_files: ["base"]
+
 # load django fixtures into database
 load_fixtures: False
 fixture_labels: "superuser"
