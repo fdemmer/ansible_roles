@@ -25,6 +25,7 @@
   with_items:
     - libxml2-dev
     - libxslt1-dev
+    - zlib1g-dev
   when: support_lxml
 
 - name: install library headers for mysql
