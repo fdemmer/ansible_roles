@@ -28,7 +28,7 @@
     path="{{ source_path }}/{{ service_name }}"
   register: source_path_service
 
-- include: 11-startproject.yml
+- include: 11-startdjango.yml
   become_user: "{{ service_user }}"
   when: source_path_service.stat.exists == False
 
@@ -41,3 +41,10 @@
     state=link
   notify:
     - restart service group
+
+- name: make manage.py executeable
+  file: >
+    path="{{ source_path }}/manage.py"
+    owner={{ service_user }}
+    group={{ service_group }}
+    mode=0755
