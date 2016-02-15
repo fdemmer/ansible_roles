@@ -103,6 +103,9 @@ use_apache: not use_nginx|bool
 use_gunicorn: True
 use_uwsgi: not use_gunicorn|bool
 
+# when creating a new project, use wagtail (mutually exclusive with django_project_template)
+use_wagtail: False
+
 # project uses postgresql as database, configure access
 use_postgresql: False
 

@@ -1,0 +1,16 @@
+---
+# install the latest wagtail and create a new project structure
+
+- name: install wagtail to create new project
+  pip: >
+    virtualenv="{{ virtualenv_path }}"
+    executable="{{ virtualenv_path }}/bin/pip"
+    name="{{ item }}"
+    state=latest
+  with_items:
+    - "Django"
+    - "wagtail"
+
+- name: create new wagtail project
+  shell: >
+    {{ virtualenv_path }}/bin/wagtail start {{ service_name }} {{ source_path }}
