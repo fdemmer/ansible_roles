@@ -32,7 +32,7 @@
   become_user: "{{ service_user }}"
   when: source_path_service.stat.exists == False and not use_wagtail
 
-  - include: 11-startwagtail.yml
+- include: 11-startwagtail.yml
   when: source_path_service.stat.exists == False and use_wagtail
 
 - name: link django project from {{ source_path }}
