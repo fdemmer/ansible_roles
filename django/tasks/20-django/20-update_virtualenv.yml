@@ -32,6 +32,7 @@
     virtualenv="{{ virtualenv_path }}"
     executable="{{ virtualenv_path }}/bin/pip"
     requirements="{{ install_path }}/requirements.txt"
+    extra_args="--exists-action w"
     state=latest
   notify:
     - restart service group
