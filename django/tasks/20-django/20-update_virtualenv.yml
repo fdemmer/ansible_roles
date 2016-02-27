@@ -22,7 +22,7 @@
 
 - name: recompile requirements input
   command: >
-    {{ virtualenv_path }}/bin/pip-compile {{ install_path }}/requirements/{{ item }}.in
+    {{ virtualenv_path }}/bin/pip-compile {{ install_path }}/requirements/{{ item }}.in --upgrade
   with_items: requirement_files
   when: use_pip_compile
   tags: update_requirements
