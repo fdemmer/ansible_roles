@@ -59,7 +59,7 @@ nginx_autoindex_media_path: "on"
 # gunicorn
 gunicorn_host: "0.0.0.0"
 gunicorn_port: "8000"
-gunicorn_loglevel: "debug"
+gunicorn_loglevel: "info"
 gunicorn_autoreload: "True"
 gunicorn_workers: 1
 
