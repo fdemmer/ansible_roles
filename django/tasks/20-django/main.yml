@@ -4,8 +4,8 @@
 - include: 10-install.yml
   tags: install
 
-- include: 20-update_virtualenv.yml
-  tags: update_virtualenv
+- include: 20-update_requirements.yml
+  tags: update_requirements
 
 - include: 30-update_settings.yml
   tags: update_settings
