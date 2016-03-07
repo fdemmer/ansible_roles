@@ -3,6 +3,7 @@ programs = webapp{% if use_celery %}, worker{% endif %}
 
 [program:webapp]
 directory = {{ install_path }}
+environment = DJANGO_SETTINGS_MODULE={{ django_settings_module }}
 command = {{ virtualenv_path }}/bin/gunicorn
     -c {{ install_path }}/gunicorn.py
     --log-file {{ service_log_path }}/%(group_name)s-%(program_name)s.log
@@ -14,6 +15,7 @@ redirect_stderr = true
 {% if use_celery %}
 [program:worker]
 directory = {{ install_path }}
+environment = DJANGO_SETTINGS_MODULE={{ django_settings_module }}
 command = {{ virtualenv_path }}/bin/celery worker
     -A {{ service_name }}
     -l {{ celery_worker_loglevel }}

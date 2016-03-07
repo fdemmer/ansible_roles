@@ -92,6 +92,10 @@ fixture_labels: "superuser"
 
 ### django and celery settings
 
+# module name on top of {{ service_name }}.settings
+settings_module: "dev"
+django_settings_module: "{{ service_name }}.settings.{{ settings_module }}"
+
 # settings structure, used on top of {{ install_path }}/{{ service_name }}
 secret_settings: "settings/secret.py"
 local_settings: "settings/local.py"
