@@ -17,3 +17,9 @@
     - supervisor reread
     - supervisor update
     - restart service group
+
+- name: add DJANGO_SETTINGS_MODULE to .bashrc
+  lineinfile: >
+    dest="~{{ service_user }}/.bashrc"
+    line="export DJANGO_SETTINGS_MODULE={{ django_settings_module }}"
+    state=present
