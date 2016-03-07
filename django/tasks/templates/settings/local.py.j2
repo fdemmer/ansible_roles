@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # machine dependent settings
+from __future__ import unicode_literals
 from __future__ import absolute_import
 from .base import *
 
@@ -16,8 +17,8 @@ MEDIA_ROOT = '{{ media_path }}'
 DATABASES = {
     'default': {
         'ENGINE': '{{ db_engine }}',
-        'NAME': '{{ db_name }}',
-        'USER': '{{ db_user }}',
+        'NAME': DATABASE_NAME,
+        'USER': DATABASE_USER,
         'PASSWORD': DATABASE_PASSWORD,
         'HOST': '{{ db_host }}',
         'PORT': '{{ db_port }}',
