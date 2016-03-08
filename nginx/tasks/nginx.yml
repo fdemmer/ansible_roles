@@ -2,7 +2,7 @@
 # setup nginx server
 
 - name: add ppa:nginx/development
-  apt_repository: repo='ppa:nginx/development'
+  apt_repository: repo="{{ nginx_ppa }}"
   when: nginx_version_dev
 
 - name: install nginx
