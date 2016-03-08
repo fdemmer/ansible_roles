@@ -85,6 +85,9 @@ use_reversion: False
 use_pip_compile: False
 requirement_files: ["base", "dev"]
 
+# requirements file to install in virtualenv
+requirements: "requirements.txt"
+
 # load django fixtures into database
 load_fixtures: False
 fixture_labels: "superuser"
