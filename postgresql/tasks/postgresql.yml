@@ -9,5 +9,29 @@
     - libpq-dev
     - python-psycopg2
 
+- name: allow host access via password in pg_hba.conf
+  sudo: True
+  lineinfile: >
+    dest="/etc/postgresql/9.3/main/pg_hba.conf"
+    regexp="^#*host\s+all\s+all\s+all\s+md5$"
+    line="host    all    all    all    md5"
+    state=present
+    backup=yes
+    create=no
+  notify:
+    - restart postgresql
+
+- name: set listenin on all interfaces in postgresql.conf
+  sudo: True
+  lineinfile: >
+    dest="/etc/postgresql/9.3/main/postgresql.conf"
+    regexp="^#*listen_addresses.*$"
+    line="listen_addresses = '0.0.0.0'"
+    state=present
+    backup=yes
+    create=no
+  notify:
+    - restart postgresql
+
 - name: enable postgresql
   service: name=postgresql state=started enabled=yes
