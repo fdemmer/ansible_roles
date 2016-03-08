@@ -8,18 +8,23 @@ deployments.
 Installation
 ============
 
-Paths used in the following steps are recommendations.
-
 Clone the roles in this repository:
 
     git clone <git repo> ~/.ansible/roles
 
-Make sure the ansible.cfg file in your project has the following setting:
+Note, that this command copies the roles to the ~/.ansible/roles directory.
+This is the recommended location for shared ansible roles, but you can choose
+any other location you like.
+
+Make sure the ansible.cfg file in your project (in the root directory next to
+the Vagrantfile) contains the roles_path setting:
 
     [defaults]
     roles_path = /etc/ansible/roles/:~/.ansible/roles/
 
-If not create a file ~/.ansible.cfg and add that line.
+Alternatively you can create your own configuration file in your home
+directory: ~/.ansible.cfg and add that line, including your custom roles
+location.
 
 
 Contributing
