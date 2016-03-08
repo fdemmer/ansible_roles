@@ -23,7 +23,7 @@
   command: >
     {{ virtualenv_path }}/bin/pip-compile {{ install_path }}/requirements/{{ item }}.in --upgrade
   with_items: '{{ requirement_files }}'
-  when: use_pip_compile
+  when: use_pip_compile and not disabled_by_default
 
 - name: install django app requirements
   pip: >
