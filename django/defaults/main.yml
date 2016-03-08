@@ -29,6 +29,11 @@ install_phantomjs: False
 enable_postgis: False
 
 
+### downalods, sources, etc
+# when creating a new project, use this template
+django_project_template: "https://github.com/fdemmer/django_project_template/archive/master.zip"
+
+
 ### directory structure, filesystem layout
 
 # used for logs and virtualenv owner
@@ -67,9 +72,6 @@ gunicorn_workers: 1
 
 
 ### django related switches
-
-# when creating a new project, use this template
-django_project_template: https://github.com/fdemmer/django_project_template/archive/master.zip
 
 # project uses postgresql as database, configure access
 use_postgresql: False
