@@ -18,3 +18,5 @@ dependencies:
     when: install_mysql
   - role: redis
     when: install_redis
+  - role: phantomjs
+    when: install_phantomjs

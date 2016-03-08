@@ -21,6 +21,8 @@ install_postgresql: False
 install_redis: False
 # install mysql server
 install_mysql: False
+# install phantomjs binary
+install_phantomjs: False
 
 ## other service related feature flags
 # enable postgix support in the created database and django settings
