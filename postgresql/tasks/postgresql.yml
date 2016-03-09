@@ -4,15 +4,15 @@
 - name: install postgresql
   apt: name={{ item }} state=latest update_cache=yes
   with_items:
-    - postgresql-9.3
-    - postgresql-contrib-9.3
+    - postgresql-{{ postgres_version }}
+    - postgresql-contrib-{{ postgres_version }}
     - libpq-dev
     - python-psycopg2
 
 - name: allow host access via password in pg_hba.conf
   sudo: True
   lineinfile: >
-    dest="/etc/postgresql/9.3/main/pg_hba.conf"
+    dest="/etc/postgresql/{{ postgres_version }}/main/pg_hba.conf"
     regexp="^#*host\s+all\s+all\s+all\s+md5$"
     line="host    all    all    all    md5"
     state=present
@@ -21,12 +21,24 @@
   notify:
     - restart postgresql
 
-- name: set listenin on all interfaces in postgresql.conf
+- name: set listen_addresses in postgresql.conf
   sudo: True
   lineinfile: >
-    dest="/etc/postgresql/9.3/main/postgresql.conf"
+    dest="/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
     regexp="^#*listen_addresses.*$"
-    line="listen_addresses = '0.0.0.0'"
+    line="listen_addresses = '{{ postgres_host }}'"
+    state=present
+    backup=yes
+    create=no
+  notify:
+    - restart postgresql
+
+- name: set listen_addresses in postgresql.conf
+  sudo: True
+  lineinfile: >
+    dest="/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+    regexp="^#*port.*$"
+    line="port = {{ postgres_port }}"
     state=present
     backup=yes
     create=no
