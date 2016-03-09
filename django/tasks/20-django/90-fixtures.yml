@@ -8,8 +8,11 @@
   when: load_fixtures and fixture_labels
   tags: load_fixtures
 
+- stat: path={{ source_media_path }}
+  register: _smp
+
 - name: copy initial media
   shell: >
     rsync -av {{ source_media_path }}/ {{ media_path }}/
-  when: load_fixtures
+  when: load_fixtures and _smp.stat.isdir is defined and _smp.stat.isdir
   tags: load_fixtures
