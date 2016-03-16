@@ -16,7 +16,7 @@ service_name: "service"
 
 ## service/server feature flags
 # install postgres database server
-install_postgresql: False
+install_postgresql: True
 # install redis server
 install_redis: False
 # install mysql server
