@@ -1,0 +1,9 @@
+---
+- name: restart apache
+  service: name=apache2 state=restarted
+
+- name: disable apache
+  service: name=apache2 state=stopped enabled=no
+
+- name: enable apache
+  service: name=apache2 state=started enabled=yes
