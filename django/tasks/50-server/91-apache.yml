@@ -1,0 +1,50 @@
+---
+# setup nginx for gunicorn and static files
+
+- name: remove apache default site
+  file: >
+    path={{ apache_config_path }}/sites-enabled/000-default.conf
+    state=absent
+  notify:
+   - restart apache
+
+- name: configure apache vhosts
+  template: >
+    src="apache_site.conf.j2"
+    dest="{{ apache_config_path }}/sites-available/site.conf"
+    owner={{ service_user }}
+    group={{ service_group }}
+    mode=0644
+    backup=yes
+  notify:
+   - restart apache
+
+- name: configure apache django site
+  template: >
+    src="apache.conf.j2"
+    dest="{{ apache_config_path }}/sites-available/{{ service_name }}.app"
+    owner={{ service_user }}
+    group={{ service_group }}
+    mode=0644
+    backup=yes
+  notify:
+   - restart apache
+
+- name: enable apache site configuration
+  file: >
+    src="{{ apache_config_path }}/sites-available/{{ item }}"
+    dest="{{ apache_config_path }}/sites-enabled/{{ item }}"
+    owner={{ service_user }}
+    group={{ service_group }}
+    state=link
+  with_items:
+    - "{{ service_name }}.app"
+    - "site.conf"
+  notify:
+   - restart apache
+
+- name: disable nginx
+  service: name=nginx state=stopped enabled=no
+
+- name: enable apache
+  service: name=apache2 state=started enabled=yes

@@ -1,0 +1,36 @@
+ProxyRequests Off
+ProxyPass /static/ !
+ProxyPass /media/ !
+ProxyPass / http://{{ gunicorn_host }}:{{ gunicorn_port }}/
+ProxyPassReverse / http://{{ gunicorn_host }}:{{ gunicorn_port }}/
+ProxyPreserveHost On
+
+# strip incoming header, set according to protocol
+RequestHeader unset X-Forwarded-Proto
+RequestHeader set X-Forwarded-Proto 'https' env=HTTPS
+
+Alias /static {{ static_path }}
+<Directory {{ static_path }}>
+    SetHandler None
+    Options -Indexes -Includes -ExecCGI +FollowSymLinks
+    AllowOverride None
+    Require all granted
+    <FilesMatch ".(eot|ttf|otf|woff)">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</Directory>
+
+Alias /media {{ media_path }}
+<Directory {{ media_path }}>
+    SetHandler None
+    Options -Indexes -Includes -ExecCGI +FollowSymLinks
+    AllowOverride None
+    Require all granted
+    <FilesMatch ".(eot|ttf|otf|woff)">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</Directory>
+
+LogLevel warn
+CustomLog {{ apache_log_path }}/access.log combined
+ErrorLog {{ apache_log_path }}/error.log

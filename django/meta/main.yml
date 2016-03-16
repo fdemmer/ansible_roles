@@ -10,6 +10,9 @@ dependencies:
 
   # webservers
   - role: nginx
+    when: install_nginx
+  - role: apache
+    when: install_apache
 
   # databases
   - role: postgresql

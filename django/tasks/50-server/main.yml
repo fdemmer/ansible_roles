@@ -8,3 +8,8 @@
 
 - include: 90-nginx.yml
   tags: nginx
+  when: use_nginx and not use_apache
+
+- include: 91-apache.yml
+  tags: apache
+  when: use_apache and not use_nginx
