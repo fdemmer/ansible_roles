@@ -2,3 +2,5 @@
 
 # use this binary package
 phantomjs_package: "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2"
+phantomjs_sha256: "86dd9a4bf4aee45f1a84c9f61cf1947c1d6dce9b9e8d2a907105da7852460d2f"
+phantomjs_prefix: "/usr/local"

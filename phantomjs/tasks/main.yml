@@ -4,10 +4,10 @@
   get_url: >
     url={{ phantomjs_package }}
     dest=/tmp/phantomjs.tar.bz2
-    sha256sum=86dd9a4bf4aee45f1a84c9f61cf1947c1d6dce9b9e8d2a907105da7852460d2f
+    sha256sum={{ phantomjs_sha256 }}
   tags: phantomjs
 
 - name: install phantomjs
-  shell: "tar xf /tmp/phantomjs.tar.bz2 -C /usr/local/bin/ --overwrite --wildcards '**/bin/phantomjs' --strip-components=2"
+  shell: "tar xf /tmp/phantomjs.tar.bz2 -C {{ phantomjs_prefix }}/bin/ --overwrite --wildcards '**/bin/phantomjs' --strip-components=2"
   sudo: true
   tags: phantomjs
