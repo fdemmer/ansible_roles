@@ -1,6 +1,9 @@
 ---
 # setup nginx server
 
+- name: disable apache
+  service: name=apache2 state=stopped enabled=no
+
 - name: add ppa:nginx/development
   apt_repository: repo="{{ nginx_ppa }}"
   when: nginx_version_dev
@@ -10,11 +13,8 @@
   with_items:
     - nginx
 
-- name: update nginx log directory
+- name: update access to nginx log directory
   file: >
-    path="/var/log/nginx"
+    path="{{ nginx_log_path }}"
     mode=0755
     state=directory
-
-- name: enable nginx
-  service: name=nginx state=started enabled=yes
