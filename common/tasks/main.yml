@@ -13,3 +13,6 @@
 
 - include: 30-services.yml
   tags: services
+
+- include: 40-ssl.yml
+  tags: ssl

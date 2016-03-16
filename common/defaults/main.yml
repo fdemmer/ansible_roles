@@ -1,6 +1,9 @@
 ---
 service_name: "service"
 
+service_user: "root"
+service_group: "root"
+
 locale: 'en_US.UTF-8'
 language: 'en_US:en'
 timezone: 'Europe/Vienna'
@@ -11,3 +14,5 @@ disable_puppet: True
 enable_swap: True
 swap_size: 512
 swap_location: '/mnt/swap'
+
+ssl_path: "/etc/ssl/private"
