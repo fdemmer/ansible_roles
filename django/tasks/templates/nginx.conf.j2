@@ -4,8 +4,9 @@ upstream gunicorn {
 }
 
 server {
-    listen 80 default_server{% if nginx_version_dev %} http2{% endif %};    
+    listen 80 default_server;
     listen 443 ssl{% if nginx_version_dev %} http2{% endif %};
+    listen [::]:443 ssl{% if nginx_version_dev %} http2{% endif %};
 
     ssl_certificate {{ ssl_path }}/server.crt;
     ssl_certificate_key {{ ssl_path }}/server.key;
