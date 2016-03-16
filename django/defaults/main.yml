@@ -44,6 +44,8 @@ service_group: "root"
 source_path: "/vagrant"
 source_media_path: "{{ source_path }}/public/media"
 
+ssl_path: "/etc/ssl"
+
 venvs_path: "/var/virtualenvs"
 virtualenv_path: "{{ venvs_path }}/{{ service_name }}"
 
