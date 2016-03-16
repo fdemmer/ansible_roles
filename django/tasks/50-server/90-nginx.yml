@@ -3,23 +3,34 @@
 
 - name: remove nginx default site
   file: >
-    path=/etc/nginx/sites-enabled/default
+    path={{ nginx_config_path }}/sites-enabled/default
     state=absent
-  notify: restart nginx
+  notify:
+   - restart nginx
 
-- name: configure nginx django/gunicorn site
+- name: configure nginx django site
   template: >
     src="nginx.conf.j2"
-    dest="/etc/nginx/sites-available/{{ service_name }}.conf"
+    dest="{{ nginx_config_path }}/sites-available/{{ service_name }}.conf"
     owner={{ service_user }}
     group={{ service_group }}
     mode=0644
     backup=yes
-  notify: restart nginx
+  notify:
+   - restart nginx
 
 - name: enable nginx django/gunicorn site
   file: >
-    src="/etc/nginx/sites-available/{{ service_name }}.conf"
-    dest="/etc/nginx/sites-enabled/{{ service_name }}.conf"
+    src="{{ nginx_config_path }}/sites-available/{{ service_name }}.conf"
+    dest="{{ nginx_config_path }}/sites-enabled/{{ service_name }}.conf"
+    owner={{ service_user }}
+    group={{ service_group }}
     state=link
-  notify: restart nginx
+  notify:
+   - restart nginx
+
+- name: disable apache
+  service: name=apache2 state=stopped enabled=no
+
+- name: enable nginx
+  service: name=nginx state=started enabled=yes

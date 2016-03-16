@@ -1,5 +1,5 @@
 ---
+
 # use ppa instead of distribution repository
 nginx_version_dev: False
-
 nginx_ppa: "ppa:nginx/development"

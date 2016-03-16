@@ -1,0 +1,9 @@
+---
+
+apache_config_path: "/etc/apache2"
+apache_enabled_modules:
+  - headers.load
+  - proxy.load
+  - proxy_http.load
+  - rewrite.load
+  - ssl.load

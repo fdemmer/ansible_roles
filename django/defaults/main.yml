@@ -15,8 +15,12 @@ service_name: "service"
 ### system configuration, library, service, ... feature switches
 
 ## service/server feature flags
+# install nginx webserver
+install_nginx: True
+# install apache webserver
+install_apache: False
 # install postgres database server
-install_postgresql: False
+install_postgresql: True
 # install redis server
 install_redis: False
 # install mysql server
@@ -44,7 +48,7 @@ service_group: "root"
 source_path: "/vagrant"
 source_media_path: "{{ source_path }}/public/media"
 
-ssl_path: "/etc/ssl"
+ssl_path: "/etc/ssl/private"
 
 venvs_path: "/var/virtualenvs"
 virtualenv_path: "{{ venvs_path }}/{{ service_name }}"
@@ -57,7 +61,11 @@ media_path: "{{ webapps_path }}/public/media"
 log_path: "/var/log"
 service_log_path: "{{ log_path }}/gunicorn"
 supervisor_log_path: "{{ log_path }}/supervisor"
+nginx_log_path: "{{ log_path }}/nginx"
+apache_log_path:  "{{ log_path }}/apache2"
 
+nginx_config_path: "/etc/nginx"
+apache_config_path: "/etc/apache2"
 
 ### service configuration, other than django
 
@@ -73,7 +81,11 @@ gunicorn_autoreload: "True"
 gunicorn_workers: 1
 
 
-### django related switches
+### feature switches
+
+# switch webservers
+use_nginx: False
+use_apache: False
 
 # project uses postgresql as database, configure access
 use_postgresql: False
