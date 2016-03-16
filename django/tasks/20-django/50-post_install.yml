@@ -14,12 +14,22 @@
     virtualenv={{ virtualenv_path }}
   tags: django_collectstatic
 
+- name: make messages
+  django_manage: >
+    command="makemessages --all --symlinks --extension=html,py,txt --no-wrap"
+    app_path={{ install_path }}
+    virtualenv={{ virtualenv_path }}
+  tags:
+    - django_makemessages
+
 - name: compile messages
   django_manage: >
     command="compilemessages"
     app_path={{ install_path }}
     virtualenv={{ virtualenv_path }}
-  tags: django_compilemessages
+  tags:
+    - django_makemessages
+    - django_compilemessages
 
 - name: create initial revisions for reversion
   django_manage: >
