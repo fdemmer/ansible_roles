@@ -1,8 +1,8 @@
 Ansible Role: Django
 ====================
 
-Commands
---------
+The provision_tag.sh script
+---------------------------
 
 By setting the variable "disabled_by_default" to false some tasks are
 disabled by default.
@@ -19,6 +19,38 @@ or simply by using "provision_tag.sh":
         --extra-vars '{"disabled_by_default": false}' \
         -vvvv \
         provisioning/site.yml
+
+
+Development server
+------------------
+
+To run the Django development server manually (eg. from within PyCharm) the
+gunicorn process has to be stopped.
+
+There are two ways to accomplish that.
+Inside the box tell supervisor to stop the process:
+
+     sudo supervisorctl stop all
+
+Or use an ansible task to stop the process for you. Run on the host system:
+
+    ./provisioning/scripts/provision_tag.sh stop_webapp
+
+The provision_tag.sh script is a helper to run the roles with the given tag
+in the box.
+
+
+Keeping the box updated
+-----------------------
+
+After changing the requirements.txt file you can either run provisioning again.
+Or just the task to update the virtualenv (which is faster):
+
+    ./provisioning/scripts/provision_tag.sh update_requirements
+
+To apply new migrations run the following tag:
+
+    ./provisioning/scripts/provision_tag.sh django_migrate
 
 
 Restoring a database dump
@@ -57,7 +89,8 @@ Other tags...
 Useful tags to run one-off tasks in this role:
 
 - update_requirements:
-  update packages in the project's virtualenv from current requirements.txt
+  update the requirements files from all configured *.in files and update the
+  packages in the project's virtualenv from resulting requirements.txt
 
 - django_migrate
   run manage.py migrate
@@ -67,6 +100,9 @@ Useful tags to run one-off tasks in this role:
 
 - django_compilemessages
   run manage.py compilemessages
+
+- django_makemessages
+  run manage.py makemessages and compilemessages
 
 - stop_webapp:
   stop the webapp app via supervisor
