@@ -31,6 +31,7 @@
 
 - name: disable apache
   service: name=apache2 state=stopped enabled=no
+  when: install_apache
 
 - name: enable nginx
   service: name=nginx state=started enabled=yes
