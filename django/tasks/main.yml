@@ -2,6 +2,10 @@
 # tasks to setup a django service in a new virtualenv, install gunicorn as
 # application server and configure supervisor to run it
 
+- fail: >
+    msg='Error: use_nginx and use_apache are mutually exclusive!'
+  when: use_nginx and use_apache
+
 - include: 20-django/main.yml
   tags: deploy
 
