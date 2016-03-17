@@ -1,8 +1,15 @@
 ---
 # setup nginx server
 
+- name: check for apache
+  shell: "service apache2 status"
+  register: _svc_apache
+  failed_when: >
+    _svc_apache.rc != 0 and ("unrecognized service" not in _svc_apache.stderr)
+
 - name: disable apache
   service: name=apache2 state=stopped enabled=no
+  when: "_svc_apache.rc == 0"
 
 - name: add ppa:nginx/development
   apt_repository: repo="{{ nginx_ppa }}"
