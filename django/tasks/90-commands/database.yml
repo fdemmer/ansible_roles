@@ -1,13 +1,5 @@
 ---
 
-- name: drop database
-  sudo_user: postgres
-  postgresql_db: >
-    name={{ db_name }}
-    state=absent
-  tags:
-    - drop_database
-
 - name: create new database dump
   sudo: False
   #local_action: shell ssh {{ live_db_host }} "pg_dump -F t -O -U {{ live_db_user }} {{ live_db_name }} | gzip -c > {{ remote_tempfile }}"
