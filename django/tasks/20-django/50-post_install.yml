@@ -19,6 +19,9 @@
     command="makemessages --all --symlinks --extension=html,py,txt --no-wrap"
     app_path={{ install_path }}
     virtualenv={{ virtualenv_path }}
+  environment:
+    LANG: "en_US.UTF-8"
+    LC_ALL: "en_US.UTF-8"
   tags:
     - django_makemessages
 
