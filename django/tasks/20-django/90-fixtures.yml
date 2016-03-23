@@ -10,6 +10,7 @@
 
 - stat: path={{ source_media_path }}
   register: _smp
+  tags: load_fixtures
 
 - name: copy initial media
   shell: >
