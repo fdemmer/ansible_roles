@@ -15,5 +15,5 @@
 - name: copy initial media
   shell: >
     rsync -av {{ source_media_path }}/ {{ media_path }}/
-  when: load_fixtures and _smp.stat.isdir is defined and _smp.stat.isdir
+  when: _smp.stat.isdir is defined and _smp.stat.isdir
   tags: load_fixtures
