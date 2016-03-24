@@ -4,8 +4,7 @@
 - name: check for nginx
   shell: "service nginx status"
   register: _svc_nginx
-  failed_when: >
-    _svc_nginx.rc != 0 and ("unrecognized service" not in _svc_nginx.stderr)
+  ignore_errors: yes
 
 - name: disable nginx
   service: name=nginx state=stopped enabled=no
