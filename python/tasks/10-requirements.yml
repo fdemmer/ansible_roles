@@ -10,6 +10,12 @@
     - gettext
     # required to build anything
     - build-essential
+    # to install ynthing at all
+    - python-pip
+    # easy virtualenv management
+    - virtualenvwrapper
+    # required for dependencies from git repositories
+    - git
   when: support_django
 
 - name: install library headers for pillow

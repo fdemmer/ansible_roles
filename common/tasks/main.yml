@@ -7,9 +7,6 @@
   tags: swap
   when: enable_swap and swap_size > 0
 
-- include: 22-python2.yml
-  tags: python2
-
 - include: 30-services.yml
   tags: services
 
