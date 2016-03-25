@@ -1,6 +1,14 @@
 
 upstream django {
+{% if use_gunicorn %}
     server {{ gunicorn_host }}:{{ gunicorn_port }} fail_timeout=0;
+{% elif use_uwsgi %}
+{% if use_uwsgi_socket %}
+    server unix://{{ uwsgi_socket }};
+{% else %}
+    server {{ uwsgi_host }}:{{ uwsgi_port }} fail_timeout=0;
+{% endif %}
+{% endif %}
 }
 
 server {
@@ -37,7 +45,12 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_redirect off;
+        {% if use_gunicorn %}
         proxy_pass http://django;
+        {% elif use_uwsgi %}
+        include uwsgi_params;
+        uwsgi_pass django;
+        {% endif %}
     }
 
     # https://mozilla.github.io/server-side-tls/ssl-config-generator/

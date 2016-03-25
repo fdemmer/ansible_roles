@@ -84,6 +84,9 @@ gunicorn_workers: 2
 uwsgi_host: "{{ gunicorn_host }}"
 uwsgi_port: "{{ gunicorn_port }}"
 uwsgi_workers: "{{ gunicorn_workers }}"
+# uwsgi does not serve static files, no use serving on tcp port
+use_uwsgi_socket: True
+uwsgi_socket: "/tmp/uwsgi.sock"
 
 
 ### feature switches
