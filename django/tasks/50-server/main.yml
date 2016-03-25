@@ -1,6 +1,7 @@
 ---
 
 - include: 10-supervisor.yml
+  become_user: "root"
   tags: supervisor
 
 - include: 20-gunicorn.yml
@@ -12,9 +13,11 @@
   when: use_uwsgi
 
 - include: 90-nginx.yml
+  become_user: "root"
   tags: nginx
   when: use_nginx
 
 - include: 91-apache.yml
+  become_user: "root"
   tags: apache
   when: use_apache

@@ -1,4 +1,6 @@
 ---
 
 - include: 10-requirements.yml
+  become_user: 'root'
+
 - include: 20-virtualenv.yml

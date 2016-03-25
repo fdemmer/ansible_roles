@@ -10,7 +10,6 @@
     - python-psycopg2
 
 - name: allow host access via password in pg_hba.conf
-  sudo: True
   lineinfile: >
     dest="/etc/postgresql/{{ postgres_version }}/main/pg_hba.conf"
     regexp="^#*host\s+all\s+all\s+all\s+md5$"
@@ -22,7 +21,6 @@
     - restart postgresql
 
 - name: set listen_addresses in postgresql.conf
-  sudo: True
   lineinfile: >
     dest="/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
     regexp="^#*listen_addresses.*$"
@@ -34,7 +32,6 @@
     - restart postgresql
 
 - name: set listen_addresses in postgresql.conf
-  sudo: True
   lineinfile: >
     dest="/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
     regexp="^#*port.*$"

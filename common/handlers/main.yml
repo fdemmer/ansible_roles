@@ -1,4 +1,5 @@
 ---
 
 - name: update tzdata
+  become_user: "root"
   command: /usr/sbin/dpkg-reconfigure --frontend noninteractive tzdata

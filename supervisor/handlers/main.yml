@@ -1,10 +1,13 @@
 ---
 
 - name: supervisor reread
+  become_user: 'root'
   command: supervisorctl reread
 
 - name: supervisor update
+  become_user: 'root'
   command: supervisorctl update
 
 - name: supervisor reload
+  become_user: 'root'
   command: supervisorctl reload

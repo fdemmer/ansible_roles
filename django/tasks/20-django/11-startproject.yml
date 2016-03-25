@@ -9,10 +9,12 @@
     state=latest
 
 - name: create new django project from template
+  become_user: "{{ service_user }}"
   shell: >
     {{ virtualenv_path }}/bin/python -m django startproject --template={{ django_project_template }} {{ service_name }} {{ source_path }}
 
 - name: make manage.py executeable
+  become_user: "{{ service_user }}"
   file: >
     path="{{ source_path }}/manage.py"
     owner={{ service_user }}

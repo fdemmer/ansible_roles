@@ -2,11 +2,12 @@
 # setup the django service in supervisor
 
 - name: create service log directory
-  file: path="{{ service_log_path }}"
-        owner={{ service_user }}
-        group={{ service_group }}
-        mode=0755
-        state=directory
+  file: >
+    path="{{ service_log_path }}"
+    owner="{{ service_user }}"
+    group="{{ service_group }}"
+    mode=0755
+    state=directory
 
 - name: stop all
   supervisorctl: >

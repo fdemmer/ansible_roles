@@ -1,3 +1,4 @@
 ---
 - include: apache.yml
+  become_user: "root"
   tags: apache

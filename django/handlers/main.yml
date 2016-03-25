@@ -2,23 +2,25 @@
 # process handlers
 
 - name: stop service group
+  become_user: "root"
   supervisorctl: >
     name="{{ service_name }}:*"
     state=stopped
 
 - name: restart service group
-  become: yes
-  become_user: 'root'
+  become_user: "root"
   supervisorctl: >
     name="{{ service_name }}:*"
     state=restarted
 
 - name: restart webapp
+  become_user: "root"
   supervisorctl: >
     name="{{ service_name }}:webapp"
     state=restarted
 
 - name: restart worker
+  become_user: "root"
   supervisorctl: >
     name="{{ service_name }}:worker"
     state=restarted

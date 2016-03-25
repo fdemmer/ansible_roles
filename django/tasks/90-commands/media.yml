@@ -1,13 +1,11 @@
 ---
 
 - name: get live host key
-  sudo: False
   shell: ssh-keyscan {{ live_host }} >> ~/.ssh/known_hosts
   tags:
     - import_media
 
 - name: download media
-  sudo: False
   shell: rsync -av -e ssh {{ live_host_user }}@{{ live_host }}:{{ remote_media_path }}/ {{ media_path }}/
   tags:
     - import_media

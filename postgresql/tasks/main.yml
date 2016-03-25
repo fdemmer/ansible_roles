@@ -1,9 +1,11 @@
 ---
 
 - include: postgresql.yml
+  become_user: 'root'
   tags: postgresql
 
 - include: postgis.yml
+  become_user: 'root'
   tags:
     - postgresql
     - postgis

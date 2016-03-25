@@ -1,3 +1,4 @@
 ---
 - name: restart mysql
+  become_user: 'root'
   service: name=mysql-server state=restarted

@@ -2,6 +2,7 @@
 # prepare python2 and create a service virtualenv
 
 - name: install python2 headers
+  become_user: 'root'
   apt: name={{ item }} state=latest update_cache=yes
   with_items:
     - python-dev

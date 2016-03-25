@@ -12,6 +12,7 @@
   when: enable_postgis
 
 - name: configure django secret settings
+  become_user: "{{ service_user }}"
   template: >
     src="settings/secret.py.j2"
     dest="{{ install_path }}/{{ service_name }}/{{ secret_settings }}"
@@ -23,6 +24,7 @@
     - restart service group
 
 - name: configure django local settings
+  become_user: "{{ service_user }}"
   template: >
     src="settings/local.py.j2"
     dest="{{ install_path }}/{{ service_name }}/{{ local_settings }}"
@@ -34,6 +36,7 @@
     - restart service group
 
 - name: add DJANGO_SETTINGS_MODULE to .bashrc
+  become_user: "{{ service_user }}"
   lineinfile: >
     dest="~{{ service_user }}/.bashrc"
     line="export DJANGO_SETTINGS_MODULE={{ django_settings_module }}"

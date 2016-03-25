@@ -1,3 +1,4 @@
 ---
 - name: restart postgresql
+  become_user: 'root'
   service: name=postgresql state=restarted

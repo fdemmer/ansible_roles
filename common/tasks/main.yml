@@ -1,14 +1,18 @@
 ---
 
 - include: 10-locale.yml
+  become_user: "root"
   tags: locale
 
 - include: 11-swap.yml
+  become_user: "root"
   tags: swap
   when: enable_swap and swap_size > 0
 
 - include: 30-services.yml
+  become_user: "root"
   tags: services
 
 - include: 40-ssl.yml
+  become_user: "root"
   tags: ssl

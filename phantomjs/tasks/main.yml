@@ -8,6 +8,6 @@
   tags: phantomjs
 
 - name: install phantomjs
+  become_user: 'root'
   shell: "tar xf /tmp/phantomjs.tar.bz2 -C {{ phantomjs_prefix }}/bin/ --overwrite --wildcards '**/bin/phantomjs' --strip-components=2"
-  sudo: true
   tags: phantomjs

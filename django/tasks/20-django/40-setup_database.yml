@@ -2,7 +2,7 @@
 # create database with user, run migrations and load sample data
 
 - name: drop database
-  sudo_user: postgres
+  become_user: "postgres"
   postgresql_db: >
     name={{ db_name }}
     state=absent
@@ -11,7 +11,7 @@
   when: not disabled_by_default
 
 - name: create database
-  sudo_user: postgres
+  become_user: "postgres"
   postgresql_db: >
     name={{ db_name }}
     template='template0'
@@ -20,7 +20,7 @@
   tags: create_database
 
 - name: enable spatial extensions
-  sudo_user: postgres
+  become_user: "postgres"
   postgresql_ext: name={{ item }} db={{ db_name }}
   with_items:
     - postgis
@@ -29,7 +29,7 @@
   tags: create_database
 
 - name: create database user
-  sudo_user: postgres
+  become_user: "postgres"
   postgresql_user: >
     db={{ db_name }}
     name={{ db_user }}
@@ -40,7 +40,7 @@
   tags: create_database
 
 - name: configure pgpass for {{ service_user }}
-  sudo_user: "{{ service_user }}"
+  become_user: "{{ service_user }}"
   lineinfile: >
     dest="~/.pgpass"
     line="localhost:*:{{ db_name }}:{{ db_user }}:{{ db_password }}"

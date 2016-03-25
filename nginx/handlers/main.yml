@@ -1,9 +1,12 @@
 ---
 - name: restart nginx
+  become_user: 'root'
   service: name=nginx state=restarted
 
 - name: disable nginx
+  become_user: 'root'
   service: name=nginx state=stopped enabled=no
 
 - name: enable nginx
+  become_user: 'root'
   service: name=nginx state=started enabled=yes

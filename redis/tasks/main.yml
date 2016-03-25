@@ -1,4 +1,5 @@
 ---
 
 - include: redis.yml
+  become_user: 'root'
   tags: redis
