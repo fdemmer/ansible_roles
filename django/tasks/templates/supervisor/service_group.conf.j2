@@ -4,10 +4,16 @@ programs = webapp{% if use_celery %}, worker{% endif %}
 [program:webapp]
 directory = {{ install_path }}
 environment = DJANGO_SETTINGS_MODULE={{ django_settings_module }}
+{% if use_gunicorn %}
 command = {{ virtualenv_path }}/bin/gunicorn
     -c {{ install_path }}/gunicorn.py
-    --log-file {{ service_log_path }}/%(group_name)s-%(program_name)s.log
+    --log-file {{ service_log_path }}/gunicorn-{{ service_name }}.log
     wsgi:application
+{% elif use_uwsgi %}
+command = {{ virtualenv_path }}/bin/uwsgi
+	--ini {{ install_path }}/uwsgi.ini
+	--die-on-term
+{% endif %}
 user = {{ service_user }}
 stdout_logfile = {{ supervisor_log_path }}/%(group_name)s-%(program_name)s.log
 redirect_stderr = true

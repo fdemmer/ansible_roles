@@ -1,0 +1,11 @@
+[uwsgi]
+chdir = {{ install_path }}
+home = {{ virtualenv_path }}
+env = LANG='en_US.UTF-8'
+http = {{ uwsgi_host }}:{{ uwsgi_port }}
+processes = {{ uwsgi_workers }}
+master = True
+vacuum = True
+max-requests = 5000
+#logto = {{ service_log_path }}/uwsgi-{{ service_name }}.log
+module = wsgi:application

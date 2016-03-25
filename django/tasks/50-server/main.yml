@@ -5,6 +5,11 @@
 
 - include: 20-gunicorn.yml
   tags: gunicorn
+  when: use_gunicorn
+
+- include: 21-uwsgi.yml
+  tags: uwsgi
+  when: use_uwsgi
 
 - include: 90-nginx.yml
   tags: nginx
