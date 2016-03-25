@@ -7,7 +7,7 @@
 - include: 23-python3.yml
   when: use_python3
 
-- name: configure virtualenv directory
+- name: configure virtualenv home directory
   become_user: 'root'
   lineinfile: >
     dest=/etc/environment
@@ -15,7 +15,7 @@
     line=WORKON_HOME={{ venvs_path }}
     state=present
 
-- name: update virtualenv owner
+- name: update virtualenv home directory owner
   become_user: 'root'
   file: >
     path={{ venvs_path }}

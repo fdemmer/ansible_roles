@@ -5,10 +5,12 @@
     --string=abcdefghijklmnopqrstuvwxyz0123456789\@\%\^\&\*\(\-\_\=\+\)
     --chars=50
   register: _
-- set_fact: django_secret_key="{{_.stdout}}"
+- set_fact: >
+    django_secret_key="{{_.stdout}}"
 
 - name: determine database engine
-  set_fact: db_engine="{{ db_engine_postgis }}"
+  set_fact: >
+    db_engine="{{ db_engine_postgis }}"
   when: enable_postgis
 
 - name: configure django secret settings
