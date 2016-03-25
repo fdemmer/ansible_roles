@@ -59,7 +59,7 @@ static_path: "{{ webapps_path }}/public/static"
 media_path: "{{ webapps_path }}/public/media"
 
 log_path: "/var/log"
-service_log_path: "{{ log_path }}/gunicorn"
+service_log_path: "{{ log_path }}/{{ service_name }}"
 supervisor_log_path: "{{ log_path }}/supervisor"
 nginx_log_path: "{{ log_path }}/nginx"
 apache_log_path:  "{{ log_path }}/apache2"
