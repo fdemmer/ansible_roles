@@ -8,6 +8,11 @@
         mode=0755
         state=directory
 
+- name: stop all
+  supervisorctl: >
+    name="all"
+    state=stopped
+
 - name: configure service in supervisor
   template: >
     src="supervisor/service_group.conf.j2"
