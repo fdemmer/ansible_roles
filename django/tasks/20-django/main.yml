@@ -14,7 +14,9 @@
   tags: setup_database
 
 - include: 50-post_install.yml
+  become_user: "{{ service_user }}"
   tags: post_install
 
 - include: 90-fixtures.yml
+  become_user: "{{ service_user }}"
   tags: fixtures

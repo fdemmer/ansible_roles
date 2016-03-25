@@ -28,6 +28,7 @@
   register: source_path_service
 
 - include: 11-startproject.yml
+  become_user: "{{ service_user }}"
   when: source_path_service.stat.exists == False
 
 - name: link django project from /vagrant dir
