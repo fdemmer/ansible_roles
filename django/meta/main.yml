@@ -8,7 +8,7 @@ dependencies:
   # process management
   - role: supervisor
 
-  # webservers
+  # web servers
   - role: nginx
     when: install_nginx
   - role: apache

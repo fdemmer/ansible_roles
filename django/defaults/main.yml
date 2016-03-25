@@ -89,8 +89,8 @@ uwsgi_workers: "{{ gunicorn_workers }}"
 ### feature switches
 
 # switch webservers
-use_nginx: False
-use_apache: False
+use_nginx: True
+use_apache: not use_nginx|bool
 
 # switch wsgi servers
 use_gunicorn: True
