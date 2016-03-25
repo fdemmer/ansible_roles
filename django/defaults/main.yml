@@ -80,12 +80,21 @@ gunicorn_loglevel: "info"
 gunicorn_autoreload: "True"
 gunicorn_workers: 1
 
+# uwsgi
+uwsgi_host: "{{ gunicorn_host }}"
+uwsgi_port: "{{ gunicorn_port }}"
+uwsgi_workers: "{{ gunicorn_workers }}"
+
 
 ### feature switches
 
 # switch webservers
 use_nginx: False
 use_apache: False
+
+# switch wsgi servers
+use_gunicorn: True
+use_uwsgi: not use_gunicorn|bool
 
 # project uses postgresql as database, configure access
 use_postgresql: False
