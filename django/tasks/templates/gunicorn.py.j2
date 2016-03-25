@@ -3,5 +3,8 @@ import multiprocessing
 bind = '{{ gunicorn_host }}:{{ gunicorn_port }}'
 workers = {{ gunicorn_workers }}
 
+user = '{{ service_user }}'
+group = '{{ service_group }}'
+
 reload = {{ gunicorn_autoreload }}
 loglevel = '{{ gunicorn_loglevel }}'

@@ -14,7 +14,7 @@ command = {{ virtualenv_path }}/bin/uwsgi
 	--ini {{ install_path }}/uwsgi.ini
 	--die-on-term
 {% endif %}
-user = {{ service_user }}
+
 stdout_logfile = {{ supervisor_log_path }}/%(group_name)s-%(program_name)s.log
 redirect_stderr = true
 
