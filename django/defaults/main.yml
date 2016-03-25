@@ -59,7 +59,7 @@ static_path: "{{ webapps_path }}/public/static"
 media_path: "{{ webapps_path }}/public/media"
 
 log_path: "/var/log"
-service_log_path: "{{ log_path }}/gunicorn"
+service_log_path: "{{ log_path }}/{{ service_name }}"
 supervisor_log_path: "{{ log_path }}/supervisor"
 nginx_log_path: "{{ log_path }}/nginx"
 apache_log_path:  "{{ log_path }}/apache2"
@@ -78,14 +78,26 @@ gunicorn_host: "0.0.0.0"
 gunicorn_port: "8000"
 gunicorn_loglevel: "info"
 gunicorn_autoreload: "True"
-gunicorn_workers: 1
+gunicorn_workers: 2
+
+# uwsgi
+uwsgi_host: "{{ gunicorn_host }}"
+uwsgi_port: "{{ gunicorn_port }}"
+uwsgi_workers: "{{ gunicorn_workers }}"
+# uwsgi does not serve static files, no use serving on tcp port
+use_uwsgi_socket: True
+uwsgi_socket: "/tmp/uwsgi.sock"
 
 
 ### feature switches
 
 # switch webservers
-use_nginx: False
-use_apache: False
+use_nginx: True
+use_apache: not use_nginx|bool
+
+# switch wsgi servers
+use_gunicorn: True
+use_uwsgi: not use_gunicorn|bool
 
 # project uses postgresql as database, configure access
 use_postgresql: False

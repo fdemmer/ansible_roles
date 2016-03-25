@@ -1,0 +1,18 @@
+---
+# setup uwsgi
+
+- name: install uwsgi
+  pip: virtualenv="{{ virtualenv_path }}"
+       executable="{{ virtualenv_path }}/bin/pip"
+       name=uwsgi
+
+- name: configure uwsgi
+  template: >
+    src="uwsgi.ini.j2"
+    dest="{{ install_path }}/uwsgi.ini"
+    owner={{ service_user }}
+    group={{ service_group }}
+    mode=0644
+    backup=yes
+  notify:
+    - restart webapp

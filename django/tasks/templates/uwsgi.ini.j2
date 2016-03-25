@@ -1,0 +1,19 @@
+[uwsgi]
+chdir = {{ install_path }}
+home = {{ virtualenv_path }}
+uid = {{ service_user }}
+gid = {{ service_group }}
+env = LANG='en_US.UTF-8'
+{% if use_uwsgi_socket %}
+socket = {{ uwsgi_socket }}
+chmod-socket = 664
+chown-socket = www-data:www-data
+{% else %}
+http = {{ uwsgi_host }}:{{ uwsgi_port }}
+{% endif %}
+processes = {{ uwsgi_workers }}
+master = True
+vacuum = True
+max-requests = 5000
+#logto = {{ service_log_path }}/uwsgi-{{ service_name }}.log
+module = wsgi:application

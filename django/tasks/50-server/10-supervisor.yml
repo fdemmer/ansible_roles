@@ -8,6 +8,11 @@
         mode=0755
         state=directory
 
+- name: stop all
+  supervisorctl: >
+    name="all"
+    state=stopped
+
 - name: configure service in supervisor
   template: >
     src="supervisor/service_group.conf.j2"
@@ -17,9 +22,3 @@
     - supervisor reread
     - supervisor update
     - restart service group
-
-- name: add DJANGO_SETTINGS_MODULE to .bashrc
-  lineinfile: >
-    dest="~{{ service_user }}/.bashrc"
-    line="export DJANGO_SETTINGS_MODULE={{ django_settings_module }}"
-    state=present

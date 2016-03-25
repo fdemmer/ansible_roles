@@ -8,6 +8,8 @@
     - makepasswd
     # required for make/compilemessages
     - gettext
+    # required to build anything
+    - build-essential
   when: support_django
 
 - name: install library headers for pillow
