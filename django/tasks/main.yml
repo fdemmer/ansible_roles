@@ -10,6 +10,10 @@
     msg='Error: use_gunicorn and use_uwsgi are mutually exclusive!'
   when: use_gunicorn|bool and use_uwsgi|bool
 
+- fail: >
+    msg='Error: uWSGI with Apache is not supported!'
+  when: use_apache|bool and use_uwsgi|bool
+
 - include: 20-django/main.yml
   tags: deploy
 
