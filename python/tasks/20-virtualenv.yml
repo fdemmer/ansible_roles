@@ -7,6 +7,16 @@
 - include: 23-python3.yml
   when: use_python3
 
+- name: update virtualenvwrapper and pip
+  pip: >
+    virtualenv="{{ virtualenv_path }}"
+    executable="{{ virtualenv_path }}/bin/pip"
+    name={{ item }}
+    state=latest
+  with_items:
+    - "pip==8.1.0"
+    - "virtualenvwrapper"
+
 - name: configure virtualenv home directory
   become_user: 'root'
   lineinfile: >
