@@ -1,0 +1,21 @@
+---
+# setup nodejs
+
+- name: add nodesource.com repository
+  apt_repository: >
+    repo="{{ item }}"
+    state=present
+  with_items:
+    - "deb https://deb.nodesource.com/{{ node_release }} {{ ansible_distribution_release }} main"
+    - "deb-src https://deb.nodesource.com/{{ node_release }} {{ ansible_distribution_release }} main"
+  when: node_release != "distro"
+
+- name: add nodesource.com repository key
+  apt_key: >
+    url="https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+  when: node_release != "distro"
+
+- name: install nodejs
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - nodejs
