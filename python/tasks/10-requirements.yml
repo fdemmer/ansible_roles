@@ -2,7 +2,7 @@
 # install required tools and system wide libraries
 
 - name: install utilities
-  apt: name={{ item }} state=latest update_cache=yes
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
   with_items:
     # required to generate secret key
     - makepasswd
@@ -19,7 +19,7 @@
   when: support_django
 
 - name: install library headers for pillow
-  apt: name={{ item }} state=latest update_cache=yes
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
   with_items:
     - libjpeg-dev
     - libtiff-dev
@@ -29,7 +29,7 @@
   when: support_pillow
 
 - name: install library headers for lxml
-  apt: name={{ item }} state=latest update_cache=yes
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
   with_items:
     - libxml2-dev
     - libxslt1-dev
@@ -37,13 +37,13 @@
   when: support_lxml
 
 - name: install library headers for mysql
-  apt: name={{ item }} state=latest update_cache=yes
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
   with_items:
     - libmysqlclient-dev
   when: support_mysql
 
 - name: install library headers for cffi support
-  apt: name={{ item }} state=latest update_cache=yes
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
   with_items:
     - libffi-dev
   when: support_cffi

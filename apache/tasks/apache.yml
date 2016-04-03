@@ -11,7 +11,7 @@
   when: "_svc_nginx.rc == 0"
 
 - name: install apache
-  apt: name={{ item }} state=latest update_cache=yes
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
   with_items:
     - apache2
 
