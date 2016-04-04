@@ -1,12 +1,8 @@
-About
-=====
-
-This is a collection of common ansible roles to use with vagrant or actual 
-deployments.
+A collection of ansible roles to use primarily with vagrant.
 
 
 Installation
-============
+------------
 
 Clone the roles in this repository:
 
@@ -27,14 +23,31 @@ directory: ~/.ansible.cfg and add that line, including your custom roles
 location.
 
 
-Contributing
-============
+Usage
+-----
 
-When modifying an existing role changes should be pushed to a feature
-branch for review. Only after compatibility of the changes has been tested
-in *all* projects using the role, it should be accepted into master.
+Please inspect the defaults and tasks files of the roles for insights.
 
-Specialized roles only suitable to a specific project should be kept in 
-the project repository.
+Primary usecase of this role collection is provisioning of Django projects
+with vagrant. Typically you would start out with a site.yml like this:
 
+    ---
+    - name: provision service
+      hosts: default
+      become: yes
+      become_user: 'root'
+
+      vars:
+        - service_name: 'foo'
+
+      roles:
+        - common
+        - python
+        - django
+
+
+License
+-------
+
+See LICENSE
 
