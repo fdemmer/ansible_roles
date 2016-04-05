@@ -5,6 +5,7 @@
     command=migrate
     app_path={{ install_path }}
     virtualenv={{ virtualenv_path }}
+    settings={{ django_settings_module }}
   tags: django_migrate
 
 - name: collect static files
@@ -12,6 +13,7 @@
     command="collectstatic"
     app_path={{ install_path }}
     virtualenv={{ virtualenv_path }}
+    settings={{ django_settings_module }}
   tags: django_collectstatic
 
 - name: make messages
@@ -19,6 +21,7 @@
     command="makemessages --all --symlinks --extension=html,py,txt --no-wrap"
     app_path={{ install_path }}
     virtualenv={{ virtualenv_path }}
+    settings={{ django_settings_module }}
   environment:
     LANG: "en_US.UTF-8"
     LC_ALL: "en_US.UTF-8"
@@ -30,6 +33,7 @@
     command="compilemessages"
     app_path={{ install_path }}
     virtualenv={{ virtualenv_path }}
+    settings={{ django_settings_module }}
   tags:
     - django_makemessages
     - django_compilemessages
@@ -39,5 +43,18 @@
     command="createinitialrevisions"
     app_path={{ install_path }}
     virtualenv={{ virtualenv_path }}
+    settings={{ django_settings_module }}
   tags: django_initialrevisions
   when: use_reversion
+
+- name: add virtualenv postactivate hook to set correct django settings module
+  template: >
+    src="virtualenv/postactivate.j2"
+    dest="{{ virtualenv_path }}/bin/postactivate"
+    backup=yes
+
+- name: add virtualenv postdeactivate hook to unset django settings module
+  template: >
+    src="virtualenv/postdeactivate.j2"
+    dest="{{ virtualenv_path }}/bin/postdeactivate"
+    backup=yes

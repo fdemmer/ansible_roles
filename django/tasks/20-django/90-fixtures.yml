@@ -5,6 +5,7 @@
     command="loaddata {{ fixture_labels }}"
     app_path={{ install_path }}
     virtualenv={{ virtualenv_path }}
+    settings={{ django_settings_module }}
   when: load_fixtures and fixture_labels
   tags: load_fixtures
 
