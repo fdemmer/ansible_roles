@@ -1,6 +1,7 @@
 ---
 
 - name: create new database dump
+  become: no
   #local_action: shell ssh {{ live_db_host }} "pg_dump -F t -O -U {{ live_db_user }} {{ live_db_name }} | gzip -c > {{ remote_tempfile }}"
   local_action: shell ssh {{ live_host_user }}@{{ live_db_host }} "pg_dump -Fc -f {{ remote_tempfile }} -O -U {{ live_db_user }} {{ live_db_name }}"
   tags:
@@ -8,6 +9,7 @@
     - import_database
 
 - name: download database dump
+  become: no
   local_action: shell scp -q {{ live_host_user }}@{{ live_db_host }}:{{ remote_tempfile }} {{ local_tempfile }}
   tags:
     - download_dump
@@ -22,6 +24,7 @@
     - import_database
 
 - name: restore database dump
+  become: no
   command: pg_restore -O -h {{ db_host }} -U {{ db_user }} -d {{ db_name }} {{ target_tempfile }}
   tags:
     - restore_dump
