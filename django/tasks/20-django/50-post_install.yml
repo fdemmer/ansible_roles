@@ -56,15 +56,3 @@
   when: sphinx_projects
   tags:
     - build_docs
-
-- name: add virtualenv postactivate hook to set correct django settings module
-  template: >
-    src="virtualenv/postactivate.j2"
-    dest="{{ virtualenv_path }}/bin/postactivate"
-    backup=yes
-
-- name: add virtualenv postdeactivate hook to unset django settings module
-  template: >
-    src="virtualenv/postdeactivate.j2"
-    dest="{{ virtualenv_path }}/bin/postdeactivate"
-    backup=yes
