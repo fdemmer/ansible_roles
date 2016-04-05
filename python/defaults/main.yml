@@ -23,6 +23,8 @@ support_lxml: False
 support_mysql: False
 # install support for CFFI
 support_cffi: True
+# install enchant for sphinx spellcheck
+support_sphinx: False
 
 
 ### directory structure, filesystem layout

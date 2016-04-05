@@ -122,6 +122,9 @@ requirements: "requirements.txt"
 load_fixtures: False
 fixture_labels: "superuser"
 
+# list of sphinx projects to build
+sphinx_projects: []
+
 
 ### django and celery settings
 

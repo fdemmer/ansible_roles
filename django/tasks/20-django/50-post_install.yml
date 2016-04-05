@@ -47,6 +47,16 @@
   tags: django_initialrevisions
   when: use_reversion
 
+- name: build html documentation
+  shell: "source {{ virtualenv_path }}/bin/activate && make html"
+  args:
+    chdir: "{{ source_path }}{{ item }}"
+    executable: "/bin/bash"
+  with_items: sphinx_projects
+  when: sphinx_projects
+  tags:
+    - build_docs
+
 - name: add virtualenv postactivate hook to set correct django settings module
   template: >
     src="virtualenv/postactivate.j2"
