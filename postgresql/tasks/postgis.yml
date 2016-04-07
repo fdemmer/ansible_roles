@@ -4,4 +4,4 @@
   apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
   with_items:
     - postgis
-    - postgresql-9.3-postgis-scripts
+    - postgresql-{{ postgres_version }}-postgis-scripts

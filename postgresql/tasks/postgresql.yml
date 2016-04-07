@@ -13,7 +13,7 @@
   lineinfile: >
     dest="/etc/postgresql/{{ postgres_version }}/main/pg_hba.conf"
     regexp="^#*host\s+all\s+all\s+all\s+md5$"
-    line="host    all    all    all    md5"
+    line="host    all             all             all                     md5"
     state=present
     backup=yes
     create=no
