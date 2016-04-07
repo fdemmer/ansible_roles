@@ -1,0 +1,15 @@
+---
+
+### service or site name
+# used as default for a number of things, eg. venv, install dir, hostname, ...
+# override this in you playbook for the service/site
+service_name: "service"
+
+
+source_repository: "git@github.com"
+source_version: "master"
+
+
+### directory structure, filesystem layout
+
+source_path: "/opt/{{ service_name }}"

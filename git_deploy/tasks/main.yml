@@ -1,0 +1,17 @@
+---
+
+- name: deploy from git
+  git: >
+    repo={{ source_repository }}
+    dest={{ source_path }}
+    version={{ source_version }}
+    force=yes
+    accept_hostkey=yes
+
+- name: update {{ source_path }} owner to {{ service_user }}
+  become_user: 'root'
+  file: >
+    path={{ source_path }}
+    owner={{ service_user }}
+    group={{ service_group }}
+    recurse=yes
