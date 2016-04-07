@@ -16,7 +16,7 @@
 
 - name: configure service in supervisor
   template: >
-    src="supervisor/service_group.conf.j2"
+    src="service_group.conf.j2"
     dest="/etc/supervisor/conf.d/{{ service_name }}.conf"
     backup=yes
   notify:

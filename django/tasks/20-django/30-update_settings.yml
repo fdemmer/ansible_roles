@@ -16,7 +16,7 @@
 
 - name: configure django secret settings
   template: >
-    src="settings/secret.py.j2"
+    src="secret.py.j2"
     dest="{{ install_path }}/{{ service_name }}/{{ secret_settings }}"
     owner={{ service_user }}
     group={{ service_group }}
@@ -27,7 +27,7 @@
 
 - name: configure django local settings
   template: >
-    src="settings/local.py.j2"
+    src="local.py.j2"
     dest="{{ install_path }}/{{ service_name }}/{{ local_settings }}"
     owner={{ service_user }}
     group={{ service_group }}
