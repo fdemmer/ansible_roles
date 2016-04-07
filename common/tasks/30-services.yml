@@ -7,6 +7,7 @@
     state=stopped
     enabled=no
   when: disable_puppet
+  ignore_errors: yes
 
 - name: disable chef client
   service: >
@@ -14,3 +15,4 @@
     state=stopped
     enabled=no
   when: disable_chef
+  ignore_errors: yes
