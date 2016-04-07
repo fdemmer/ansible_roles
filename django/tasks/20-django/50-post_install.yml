@@ -56,3 +56,9 @@
   when: sphinx_projects
   tags:
     - build_docs
+
+- name: go to {{ source_path }} after login
+  lineinfile: >
+    dest="~{{ service_user }}/.bashrc"
+    line="cd {{ source_path }}"
+    state=present
