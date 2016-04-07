@@ -1,13 +1,8 @@
 ---
 
-- name: generate new secret key
-  command: makepasswd
-    --string=abcdefghijklmnopqrstuvwxyz0123456789\@\%\^\&\*\(\-\_\=\+\)
-    --chars=50
-  register: _
-
-- set_fact: >
-    django_secret_key="{{_.stdout}}"
+- name: generate django_secret_key
+  set_fact: >
+    django_secret_key="{{ lookup('password', '/tmp/foo chars=ascii_letters,digits length=50') }}"
 
 - name: determine database engine
   set_fact: >
