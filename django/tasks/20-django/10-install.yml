@@ -31,7 +31,7 @@
   become_user: "{{ service_user }}"
   when: source_path_service.stat.exists == False
 
-- name: link django project from /vagrant dir
+- name: link django project from {{ source_path }}
   file: >
     src={{ source_path }}
     dest={{ install_path }}

@@ -10,7 +10,7 @@
     - gettext
     # required to build anything
     - build-essential
-    # to install ynthing at all
+    # to install anything at all
     - python-pip
     # easy virtualenv management
     - virtualenvwrapper
