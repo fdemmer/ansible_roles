@@ -3,3 +3,9 @@
 # use ppa instead of distribution repository
 nginx_version_dev: False
 nginx_ppa: "ppa:nginx/development"
+
+
+### directory structure, filesystem layout
+
+log_path: "/var/log"
+nginx_log_path: "{{ log_path }}/nginx"
