@@ -3,6 +3,7 @@
 - name: generate django_secret_key
   set_fact: >
     django_secret_key="{{ lookup('password', '/tmp/foo chars=ascii_letters,digits length=50') }}"
+  when: django_secret_key is undefined
 
 - name: determine database engine
   set_fact: >
