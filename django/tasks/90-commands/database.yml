@@ -17,15 +17,32 @@
 
 - name: copy database dump to remote
   copy: >
-    src={{ local_tempfile }}
-    dest={{ target_tempfile }}
+    src="{{ local_tempfile }}"
+    dest="{{ target_tempfile }}"
   tags:
     - download_dump
     - import_database
 
+- name: copy local itemsfile to remote
+  copy: >
+    src="{{ local_itemsfile }}"
+    dest="{{ target_itemsfile }}"
+  when: local_itemsfile is defined
+  tags:
+    - restore_dump
+    - import_database
+
+- name: generate items from database dump
+  become: no
+  command: pg_restore -l -f {{ target_itemsfile }} {{ target_tempfile }}
+  when: local_itemsfile is undefined
+  tags:
+    - restore_dump
+    - import_database
+
 - name: restore database dump
   become: no
-  command: pg_restore -O -h {{ db_host }} -U {{ db_user }} -d {{ db_name }} {{ target_tempfile }}
+  command: pg_restore -O -h {{ db_host }} -U {{ db_user }} -d {{ db_name }} -L {{ target_itemsfile }} {{ target_tempfile }}
   tags:
     - restore_dump
     - import_database
