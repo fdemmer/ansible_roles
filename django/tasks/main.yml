@@ -15,10 +15,8 @@
   when: use_apache|bool and use_uwsgi|bool
 
 - include: 20-django/main.yml
-  tags: deploy
 
 - include: 50-server/main.yml
-  tags: deploy
 
 - include: 90-commands/main.yml
   when: not disabled_by_default
