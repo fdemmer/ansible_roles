@@ -1,27 +1,29 @@
 [group:{{ service_name }}]
-programs = webapp{% if use_celery %}, worker{% endif %}
+programs = django{% if use_celery %}, celery{% endif %}
 
-[program:webapp]
+[program:django]
+environment =
+    DJANGO_SETTINGS_MODULE={{ django_settings_module }}
 directory = {{ install_path }}
-environment = DJANGO_SETTINGS_MODULE={{ django_settings_module }}
 {% if use_gunicorn %}
 command = {{ virtualenv_path }}/bin/gunicorn
     -c {{ install_path }}/gunicorn.py
-    --log-file {{ service_log_path }}/gunicorn-{{ service_name }}.log
+    --error-logfile {{ service_log_path }}/gunicorn-error.log
+    --access-logfile {{ service_log_path }}/gunicorn-access.log
     wsgi:application
 {% elif use_uwsgi %}
 command = {{ virtualenv_path }}/bin/uwsgi
 	--ini {{ install_path }}/uwsgi.ini
 	--die-on-term
 {% endif %}
-
 stdout_logfile = {{ supervisor_log_path }}/%(group_name)s-%(program_name)s.log
 redirect_stderr = true
 
 {% if use_celery %}
-[program:worker]
+[program:celery]
+environment =
+    DJANGO_SETTINGS_MODULE={{ django_settings_module }}
 directory = {{ install_path }}
-environment = DJANGO_SETTINGS_MODULE={{ django_settings_module }}
 command = {{ virtualenv_path }}/bin/celery worker
     -A {{ service_name }}
     -l {{ celery_worker_loglevel }}
