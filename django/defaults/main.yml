@@ -156,8 +156,8 @@ celery_result_backend: ""
 celery_worker_loglevel: "debug"
 celery_default_queue: "{{ service_name }}"
 
-# additional key/value pairs to add to secret.py
-more_secrets: {}
+# additional list of key/value pairs to add to secret.py
+more_secrets: []
 
 
 ### settings for the commands tasks
