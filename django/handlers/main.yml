@@ -13,14 +13,14 @@
     name="{{ service_name }}:"
     state=restarted
 
-- name: restart webapp
+- name: restart django app
   become_user: "root"
   supervisorctl: >
-    name="{{ service_name }}:webapp"
+    name="{{ service_name }}:django"
     state=restarted
 
-- name: restart worker
+- name: restart celery worker
   become_user: "root"
   supervisorctl: >
-    name="{{ service_name }}:worker"
+    name="{{ service_name }}:celery"
     state=restarted
