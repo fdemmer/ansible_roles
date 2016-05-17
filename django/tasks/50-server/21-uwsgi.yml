@@ -15,4 +15,4 @@
     mode=0644
     backup=yes
   notify:
-    - restart webapp
+    - restart django app
