@@ -3,7 +3,6 @@
 
 - name: install uwsgi
   pip: virtualenv="{{ virtualenv_path }}"
-       executable="{{ virtualenv_path }}/bin/pip"
        name=uwsgi
 
 - name: configure uwsgi
