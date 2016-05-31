@@ -11,7 +11,6 @@
 - name: install pip-tools
   pip: >
     virtualenv="{{ virtualenv_path }}"
-    executable="{{ virtualenv_path }}/bin/pip"
     name={{ item }}
     state=latest
   with_items:
@@ -28,7 +27,6 @@
 - name: install django app requirements
   pip: >
     virtualenv="{{ virtualenv_path }}"
-    executable="{{ virtualenv_path }}/bin/pip"
     requirements="{{ install_path }}/{{ requirements }}"
     extra_args="--exists-action w"
     state=latest

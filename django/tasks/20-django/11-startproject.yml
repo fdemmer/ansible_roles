@@ -4,7 +4,6 @@
 - name: install django to create new project
   pip: >
     virtualenv="{{ virtualenv_path }}"
-    executable="{{ virtualenv_path }}/bin/pip"
     name="Django"
     state=latest
 
