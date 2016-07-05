@@ -27,6 +27,7 @@
     LC_ALL: "en_US.UTF-8"
   tags:
     - django_makemessages
+  when: not disabled_by_default
 
 - name: compile messages
   django_manage: >
