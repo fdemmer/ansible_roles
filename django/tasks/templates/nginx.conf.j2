@@ -35,6 +35,11 @@ server {
         autoindex {{ nginx_autoindex_media_path }};
     }
 
+    location ^~ /docs  {
+        alias {{ docs_path }}/;
+        autoindex {{ nginx_autoindex_static_path }};
+    }
+
     location / {
         try_files $uri @django_proxy;
     }

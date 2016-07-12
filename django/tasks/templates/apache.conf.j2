@@ -31,6 +31,17 @@ Alias /media {{ media_path }}
     </FilesMatch>
 </Directory>
 
+Alias /docs {{ docs_path }}
+<Directory {{ docs_path }}>
+    SetHandler None
+    Options -Indexes -Includes -ExecCGI +FollowSymLinks
+    AllowOverride None
+    Require all granted
+    <FilesMatch ".(eot|ttf|otf|woff)">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</Directory>
+
 LogLevel warn
 CustomLog {{ apache_log_path }}/access.log combined
 ErrorLog {{ apache_log_path }}/error.log
