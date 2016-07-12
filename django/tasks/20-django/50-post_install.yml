@@ -59,7 +59,7 @@
 
 - name: link html documentation
   file: >
-    src="{{ source_path }}/docs/{{ item }}"
+    src="{{ source_path }}/docs/{{ item }}/build/html"
     dest="{{ docs_path }}/{{ item }}"
     owner="{{ service_user }}"
     group="{{ service_group }}"

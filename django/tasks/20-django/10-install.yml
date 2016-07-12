@@ -22,6 +22,7 @@
     - "{{ static_path }}"
     - "{{ media_path }}"
     - "{{ docs_path }}"
+
 - name: register source_path_service variable
   stat: >
     path="{{ source_path }}/{{ service_name }}"
