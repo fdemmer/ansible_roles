@@ -50,7 +50,7 @@
 - name: build html documentation
   shell: "source {{ virtualenv_path }}/bin/activate && make html"
   args:
-    chdir: "{{ source_path }}{{ item }}"
+    chdir: "{{ source_path }}/docs/{{ item }}"
     executable: "/bin/bash"
   with_items: sphinx_projects
   when: sphinx_projects
