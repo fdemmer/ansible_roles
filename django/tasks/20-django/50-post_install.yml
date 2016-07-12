@@ -57,6 +57,18 @@
   tags:
     - build_docs
 
+- name: link html documentation
+  file: >
+    src="{{ source_path }}/docs/{{ item }}"
+    dest="{{ docs_path }}/{{ item }}"
+    owner="{{ service_user }}"
+    group="{{ service_group }}"
+    state=link
+  with_items: sphinx_projects
+  when: sphinx_projects
+  tags:
+    - build_docs
+
 - name: go to {{ source_path }} after login
   lineinfile: >
     dest="~{{ service_user }}/.bashrc"
