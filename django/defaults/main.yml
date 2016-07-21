@@ -57,6 +57,7 @@ webapps_path: "/var/www"
 install_path: "{{ webapps_path }}/{{ service_name }}"
 static_path: "{{ webapps_path }}/public/static"
 media_path: "{{ webapps_path }}/public/media"
+docs_path: "{{ webapps_path }}/public/docs"
 
 log_path: "/var/log"
 service_log_path: "{{ log_path }}/{{ service_name }}"

@@ -21,6 +21,7 @@
   with_items:
     - "{{ static_path }}"
     - "{{ media_path }}"
+    - "{{ docs_path }}"
 
 - name: register source_path_service variable
   stat: >

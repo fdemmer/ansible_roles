@@ -25,6 +25,8 @@ server {
     gzip_vary on;
     gzip_types text/plain text/css application/xml application/javascript application/json;
 
+    client_max_body_size 10m;
+
     location ^~ /static  {
         alias {{ static_path }}/;
         autoindex {{ nginx_autoindex_static_path }};
@@ -33,6 +35,12 @@ server {
     location ^~ /media  {
         alias {{ media_path }}/;
         autoindex {{ nginx_autoindex_media_path }};
+    }
+
+    location ^~ /docs  {
+        alias {{ docs_path }}/;
+        autoindex {{ nginx_autoindex_static_path }};
+        disable_symlinks off;
     }
 
     location / {
