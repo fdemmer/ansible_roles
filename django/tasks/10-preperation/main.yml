@@ -1,0 +1,6 @@
+---
+# prepare workarounds which are needed (mainly for starting vagrant and provisionining from a windows host system)
+
+- include: 10-workaround_requirements.yml
+  tags: workaround_requirements
+  become_user: "root"

@@ -1,0 +1,7 @@
+---
+# do cleanup operations
+
+- name: remove temp directory for generating settings
+  command: >
+    rm -r /etc/ansible/.vagrant_tmp/   
+    
