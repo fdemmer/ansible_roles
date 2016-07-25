@@ -146,6 +146,7 @@ db_user: "{{ service_name }}"
 db_password: "{{ service_name }}"
 db_host: "localhost"
 db_port: ""
+db_conn_max_age: "0"
 
 cache_backend: "django.core.cache.backends.locmem.LocMemCache"
 cache_location: "unique-snowflake"

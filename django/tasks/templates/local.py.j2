@@ -22,6 +22,7 @@ DATABASES = {
         'PASSWORD': DATABASE_PASSWORD,
         'HOST': '{{ db_host }}',
         'PORT': '{{ db_port }}',
+        'CONN_MAX_AGE': {{ db_conn_max_age }},
     },
 }
 {% endif %}
