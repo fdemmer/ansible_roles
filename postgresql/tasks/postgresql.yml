@@ -1,6 +1,10 @@
 ---
 # setup postgresql server
 
+- name: add apt repository
+  apt_repository: repo="{{ postgres_ppa }}"
+  when: postgres_version_dev
+
 - name: install postgresql
   apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
   with_items:

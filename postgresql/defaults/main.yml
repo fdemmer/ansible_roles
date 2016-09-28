@@ -1,6 +1,10 @@
 ---
 enable_postgis: False
 
+# use ppa instead of distribution repository
+postgres_version_dev: False
+postgres_ppa: "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main"
+
 postgres_version: "9.3"
 
 postgres_host: 127.0.0.1
