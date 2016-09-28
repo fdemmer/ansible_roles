@@ -4,6 +4,7 @@ enable_postgis: False
 # use ppa instead of distribution repository
 postgres_version_dev: False
 postgres_ppa: "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main"
+postgres_ppa_key: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
 
 postgres_version: "9.3"
 
