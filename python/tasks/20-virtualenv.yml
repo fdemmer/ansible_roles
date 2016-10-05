@@ -7,13 +7,14 @@
 - include: 23-python3.yml
   when: use_python3
 
-- name: update pip
+- name: update pip and setuptools
   pip: >
     virtualenv="{{ virtualenv_path }}"
     name={{ item }}
     state=latest
   with_items:
     - "pip==8.1.0"
+    - "setuptools==28.2.0"
 
 - name: configure virtualenv home directory
   become_user: 'root'
