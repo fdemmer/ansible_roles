@@ -26,6 +26,7 @@
     - zlib1g-dev
     - libfreetype6-dev
     - liblcms2-dev
+    - libjpeg8-dev
   when: support_pillow
 
 - name: install library headers for lxml
@@ -35,6 +36,12 @@
     - libxslt1-dev
     - zlib1g-dev
   when: support_lxml
+
+- name: install library headers for cryptography
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
+  with_items:
+    - libssl-dev
+  when: support_cryptography
 
 - name: install library headers for mysql
   apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
