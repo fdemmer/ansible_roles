@@ -3,14 +3,14 @@
 - name: create new database dump
   become: no
   #local_action: shell ssh {{ live_db_host }} "pg_dump -F t -O -U {{ live_db_user }} {{ live_db_name }} | gzip -c > {{ remote_tempfile }}"
-  local_action: shell ssh {{ live_host_user }}@{{ live_db_host }} "pg_dump -Fc -f {{ remote_tempfile }} -O -U {{ live_db_user }} {{ live_db_name }}"
+  local_action: shell ssh -o StrictHostKeyChecking=no {{ live_host_user }}@{{ live_db_host }} "pg_dump -Fc -f {{ remote_tempfile }} -O -U {{ live_db_user }} {{ live_db_name }}"
   tags:
     - create_dump
     - import_database
 
 - name: download database dump
   become: no
-  local_action: shell scp -q {{ live_host_user }}@{{ live_db_host }}:{{ remote_tempfile }} {{ local_tempfile }}
+  local_action: shell scp -o StrictHostKeyChecking=no -q {{ live_host_user }}@{{ live_db_host }}:{{ remote_tempfile }} {{ local_tempfile }}
   tags:
     - download_dump
     - import_database
