@@ -14,8 +14,8 @@
     name={{ item }}
     state=latest
   with_items:
-    - "pip==8.1.0"
-    - "pip-tools==1.6"
+    - "pip>=9.0.1"
+    - "pip-tools>=1.9.0"
   when: use_pip_compile
 
 - name: recompile requirements input
