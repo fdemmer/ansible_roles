@@ -27,6 +27,7 @@
     LC_ALL: "en_US.UTF-8"
   tags:
     - django_makemessages
+    - update_messages
   when: not disabled_by_default
 
 - name: compile messages
@@ -37,6 +38,7 @@
     settings={{ django_settings_module }}
   tags:
     - django_makemessages
+    - update_messages
     - django_compilemessages
 
 - name: create initial revisions for reversion
