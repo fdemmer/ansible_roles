@@ -55,6 +55,15 @@
     - libffi-dev
   when: support_cffi
 
+- name: install libraries for wasyprint
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
+  with_items:
+    - libcairo2
+    - libpango1.0-0
+    - libgdk-pixbuf2.0-0
+    - shared-mime-info
+  when: support_weasyprint
+
 - name: install enchant for sphinx spellcheck
   apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
   with_items:

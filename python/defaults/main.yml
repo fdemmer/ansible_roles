@@ -27,6 +27,8 @@ support_mysql: False
 support_cffi: True
 # install enchant for sphinx spellcheck
 support_sphinx: False
+# install libraries for weasyprint
+support_weasyprint: False
 
 
 ### directory structure, filesystem layout
