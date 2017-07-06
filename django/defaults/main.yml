@@ -80,6 +80,7 @@ gunicorn_port: "8000"
 gunicorn_loglevel: "info"
 gunicorn_autoreload: "True"
 gunicorn_workers: 2
+gunicorn_workers_auto: True
 gunicorn_worker_class: "sync"
 
 # uwsgi

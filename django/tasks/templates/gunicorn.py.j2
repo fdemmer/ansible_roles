@@ -1,7 +1,10 @@
-import multiprocessing
+{% if gunicorn_workers_auto %}import multiprocessing
 
+{% endif %}
 bind = '{{ gunicorn_host }}:{{ gunicorn_port }}'
-workers = {{ gunicorn_workers }}
+workers = {% if gunicorn_workers_auto %}multiprocessing.cpu_count() * 2 + 1
+{% else %}{{ gunicorn_workers }}
+{% endif %}
 worker_class = '{{ gunicorn_worker_class }}'
 
 user = '{{ service_user }}'
