@@ -4,6 +4,7 @@ programs = django{% if use_celery %}, celery{% endif %}
 [program:django]
 environment =
     DJANGO_SETTINGS_MODULE={{ django_settings_module }},
+    HOME={{ service_user_home }},
     LANG=en_US.UTF-8, LC_ALL=en_US.UTF-8, LC_LANG=en_US.UTF-8
 directory = {{ install_path }}
 user = {{ service_user }}

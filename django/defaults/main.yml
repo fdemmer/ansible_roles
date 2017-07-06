@@ -43,6 +43,7 @@ django_project_template: "https://github.com/fdemmer/django_project_template/arc
 # used for logs and virtualenv owner
 service_user: "root"
 service_group: "root"
+service_user_home: "/root"
 
 # path to code root, where the django project code lives
 source_path: "/vagrant"
