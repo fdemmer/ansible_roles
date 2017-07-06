@@ -5,7 +5,11 @@
   shell: >
     getent passwd {{ service_user }} | cut -d: -f6
   changed_when: false
-  register: service_user_home
+  register: service_user_home_output
+
+- name: set fact service_user_home
+  set_fact: >
+    service_user_home="{{ service_user_home_output.stdout }}"
 
 - name: create service log directory
   file: >
