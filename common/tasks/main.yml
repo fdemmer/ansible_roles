@@ -9,6 +9,10 @@
   tags: swap
   when: enable_swap and swap_size > 0
 
+- include: 12-users.yml
+  become_user: "root"
+  tags: users
+
 - include: 30-services.yml
   become_user: "root"
   tags: services

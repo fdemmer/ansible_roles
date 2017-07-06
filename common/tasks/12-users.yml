@@ -1,0 +1,8 @@
+---
+
+- name: make sure service_user exists
+  user: >
+    name={{ service_user }}
+    password={{ service_user }}
+    group={{ service_group }}
+    shell=/bin/bash
