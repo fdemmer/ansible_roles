@@ -26,8 +26,7 @@
     LANG: "en_US.UTF-8"
     LC_ALL: "en_US.UTF-8"
   tags:
-    - django_makemessages
-    - update_messages
+    - update_translations
   when: not disabled_by_default
 
 - name: compile messages
@@ -37,9 +36,7 @@
     virtualenv={{ virtualenv_path }}
     settings={{ django_settings_module }}
   tags:
-    - django_makemessages
-    - update_messages
-    - django_compilemessages
+    - update_translations
 
 - name: create initial revisions for reversion
   django_manage: >
