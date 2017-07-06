@@ -17,6 +17,7 @@
     owner={{ service_user }}
     group={{ service_group }}
     mode=0644
+  when: write_local_settings
   notify:
     - restart service group
 
@@ -27,6 +28,7 @@
     owner={{ service_user }}
     group={{ service_group }}
     mode=0644
+  when: write_local_settings
   notify:
     - restart service group
 
