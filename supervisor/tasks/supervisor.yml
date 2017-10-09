@@ -8,5 +8,5 @@
 - name: enable/start supervisor
   service: >
     name=supervisor
-    state=running
+    state=started
     enabled=yes
