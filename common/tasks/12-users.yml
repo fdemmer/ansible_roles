@@ -1,6 +1,11 @@
 ---
 
-- name: make sure service_user exists
+- name: make sure service group exists
+  group: >
+    name="{{ service_group }}"
+    state=present
+
+- name: make sure service user exists
   user: >
     name={{ service_user }}
     password={{ service_user }}
