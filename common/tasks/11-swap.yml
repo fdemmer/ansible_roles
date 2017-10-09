@@ -19,7 +19,7 @@
     command: swapon {{ swap_location }}
     when: swap_file.stat.exists == False
 
-  - name: add swap file to fstab
+  - name: swap file is in /etc/fstab
     lineinfile: dest=/etc/fstab line="{{ swap_location }}   none    swap    sw    0   0" state=present
     when: swap_file.stat.exists == True
 
