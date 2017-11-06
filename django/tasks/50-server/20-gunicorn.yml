@@ -4,14 +4,25 @@
 - name: install gunicorn
   pip: virtualenv="{{ virtualenv_path }}"
        name=gunicorn
+       
 
+# there is a bug on windows host systems which doesn't allow to set the destionation for files,
+# created by the "template" command, to the shared path of vagrant. Instead of that, they are now
+# stored to a regular path within the box and in the next step moved by the shell command "mv" to 
+# their real destination.
 - name: configure gunicorn
   template: >
     src="gunicorn.py.j2"
-    dest="{{ install_path }}/gunicorn.py"
+    dest="/etc/ansible/.vagrant_tmp/configuration/gunicorn.py"
     owner={{ service_user }}
     group={{ service_group }}
     mode=0644
     backup=yes
   notify:
     - restart django app
+
+- name: move configuration to install path
+  command: >
+    mv /etc/ansible/.vagrant_tmp/configuration/gunicorn.py {{ install_path }}/gunicorn.py
+    
+

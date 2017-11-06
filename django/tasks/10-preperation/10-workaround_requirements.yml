@@ -1,0 +1,18 @@
+---
+# Create directories for fileoutputs of the ansible "template" command, since there is a bug on windows host
+# systems, when files are created via "template" and the destination of these files is set to the vagrant 
+# shared path (or a subpath). 
+# Because of that files, created by the template command, should have one of the paths below as destination.
+# These files should afterwards be moved to their real destination, by using the shell command "mv".
+
+- name: create temp directory for generating settings
+  command: >
+    mkdir -p /etc/ansible/.vagrant_tmp/settings
+    
+- name: create temp directory for generating configurations
+  command: >
+    mkdir -p /etc/ansible/.vagrant_tmp/configuration
+
+- name: change permissions of temp directories
+  command: >
+    chmod 777 -R /etc/ansible/.vagrant_tmp

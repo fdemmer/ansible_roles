@@ -10,10 +10,35 @@
     db_engine="{{ db_engine_postgis }}"
   when: enable_postgis
 
+  
+# there is a bug on windows host systems which doesn't allow to set the destionation for files,
+# created by the "template" command, to the shared path of vagrant. Instead of that, they are now
+# stored to a regular path within the box and in the next step moved by the shell command "mv" to 
+# their real destination.
 - name: configure django secret settings
   template: >
     src="secret.py.j2"
-    dest="{{ install_path }}/{{ service_name }}/{{ secret_settings }}"
+    dest="/etc/ansible/.vagrant_tmp/{{ secret_settings }}"
+    owner={{ service_user }}
+    group={{ service_group }}
+    mode=0644
+  when: write_local_settings
+  notify:
+    - restart service group
+    
+- name: move secret settings to settings directory
+  command: >
+    mv /etc/ansible/.vagrant_tmp/{{ secret_settings }} {{ install_path }}/{{ service_name }}/{{ secret_settings }}
+  
+
+# there is a bug on windows host systems which doesn't allow to set the destionation for files,
+# created by the "template" command, to the shared path of vagrant. Instead of that, they are now
+# stored to a regular path within the box and in the next step moved by the shell command "mv" to 
+# their real destination.
+- name: configure django local settings
+  template: >
+    src="local.py.j2"
+    dest="/etc/ansible/.vagrant_tmp/{{ local_settings }}"
     owner={{ service_user }}
     group={{ service_group }}
     mode=0644
@@ -21,16 +46,10 @@
   notify:
     - restart service group
 
-- name: configure django local settings
-  template: >
-    src="local.py.j2"
-    dest="{{ install_path }}/{{ service_name }}/{{ local_settings }}"
-    owner={{ service_user }}
-    group={{ service_group }}
-    mode=0644
-  when: write_local_settings
-  notify:
-    - restart service group
+- name: move local settings to settings directory
+  command: >
+    mv /etc/ansible/.vagrant_tmp/{{ local_settings }} {{ install_path }}/{{ service_name }}/{{ local_settings }}
+      
 
 - name: add DJANGO_SETTINGS_MODULE to .bashrc
   lineinfile: >
