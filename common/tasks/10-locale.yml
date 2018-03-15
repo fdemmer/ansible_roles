@@ -6,7 +6,7 @@
   command: /usr/sbin/update-locale LANG={{ locale }} LC_ALL={{ locale }} LANGUAGE={{ language }}
 
 - name: set /etc/localtime
-  command: /bin/cp /usr/share/zoneinfo/{{ timezone }} /etc/localtime
+  copy: remote_src=True src=/usr/share/zoneinfo/{{ timezone }} dest=/etc/localtime
 
 - name: set timezone (/etc/timezone)
   template: src=timezone dest=/etc/timezone

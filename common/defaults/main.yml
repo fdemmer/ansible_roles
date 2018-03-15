@@ -6,7 +6,7 @@ service_group: "root"
 
 locale: 'en_US.UTF-8'
 language: 'en_US:en'
-timezone: 'Europe/Vienna'
+timezone: 'UTC'
 
 disable_chef: True
 disable_puppet: True
