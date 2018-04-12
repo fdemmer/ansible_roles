@@ -1,0 +1,35 @@
+---
+
+- name: install mscorefonts
+  become_user: 'root'
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - ttf-mscorefonts-installer
+  tags:
+    - install_fonts
+
+- name: install required tools
+  become_user: 'root'
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - cabextract
+  tags:
+    - install_fonts
+
+- name: create local fonts directory
+  file: >
+    path="{{ item }}"
+    owner={{ service_user }}
+    group={{ service_group }}
+    mode=0755
+    state=directory
+  with_items:
+    - "~{{ service_user }}/.fonts"
+  tags:
+    - install_fonts
+
+- name: run vistafonts-installer
+  become_user: "{{ service_user }}"
+  script: vistafonts-installer.sh
+  tags:
+    - install_fonts
