@@ -11,6 +11,8 @@ service_name: "service"
 
 # use python3 instead of python2, which is default
 use_python3: False
+# alternatively setup pyenv and install python according to python-version
+use_pyenv: False
 
 ## library/dependency feature flags
 # install gettext and makepasswd
@@ -40,5 +42,5 @@ service_group: "root"
 # path to code root, where the django site module lives
 source_path: "/vagrant"
 
-venvs_path: "/var/virtualenvs"
-virtualenv_path: "{{ venvs_path }}/{{ service_name }}"
+venvs_path: "/opt/pyenv"
+virtualenv_path: "{{ venvs_path }}/versions/{{ service_name }}"

@@ -1,6 +1,9 @@
 ---
 # choose python version and setup a service virtualenv
 
+- include: 21-pyenv.yml
+  when: use_pyenv
+
 - include: 22-python2.yml
   when: not use_python3
 
@@ -15,6 +18,7 @@
   with_items:
     - "pip>=9.0.1"
     - "setuptools==28.2.0"
+  when: not use_pyenv
 
 - name: configure virtualenv home directory
   become_user: 'root'
@@ -23,6 +27,7 @@
     regexp=^WORKON_HOME={{ venvs_path }}
     line=WORKON_HOME={{ venvs_path }}
     state=present
+  when: not use_pyenv
 
 - name: update virtualenv home directory owner
   become_user: 'root'
@@ -31,9 +36,11 @@
     owner={{ service_user }}
     group={{ service_group }}
     recurse=yes
+  when: not use_pyenv
 
 - name: enable virtualenv on login
   lineinfile: >
     dest="~{{ service_user }}/.bashrc"
     line="source {{ virtualenv_path }}/bin/activate"
     state=present
+  when: not use_pyenv

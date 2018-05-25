@@ -1,0 +1,25 @@
+---
+# setup pyenv and install interpreter
+
+- name: install pyenv
+  git: repo=https://github.com/pyenv/pyenv.git dest={{ venvs_path }}
+
+- name: install pyenv-virtualenv
+  git: repo=https://github.com/pyenv/pyenv-virtualenv.git dest={{ venvs_path }}/plugins/pyenv-virtualenv
+
+- name: setup pyenv
+  lineinfile: >
+    dest="~{{ service_user }}/.bashrc"
+    state=present
+    create=yes
+    line="{{ item }}"
+  with_items:
+    - "export PYENV_ROOT=\\\"{{ venvs_path }}\\\""
+    - "export PATH=\\\"$PYENV_ROOT/bin:$PATH\\\""
+    - "eval \\\"$(pyenv init -)\\\""
+    - "eval \\\"$(pyenv virtualenv-init -)\\\""
+
+#- name: install python version using pyenv
+#  command: virtualenv -p /usr/bin/python2 {{ virtualenv_path }}
+#  args:
+#    creates: "{{ virtualenv_path }}/bin/python2"
