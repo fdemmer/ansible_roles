@@ -1,0 +1,48 @@
+---
+# setup pyenv and install interpreter
+
+- name: install pyenv
+  become_user: 'root'
+  git: repo=https://github.com/pyenv/pyenv.git dest={{ venvs_path }}
+
+- name: install pyenv-virtualenv
+  become_user: 'root'
+  git: repo=https://github.com/pyenv/pyenv-virtualenv.git dest={{ venvs_path }}/plugins/pyenv-virtualenv
+
+- name: update pyenv directory owner
+  become_user: 'root'
+  file: >
+    path={{ venvs_path }}
+    owner={{ service_user }}
+    group={{ service_group }}
+    recurse=yes
+
+- name: create pyenvrc
+  template:
+    src: "pyenvrc.j2"
+    dest: "~{{ service_user }}/.pyenvrc"
+    owner: "{{ service_user }}"
+  mode: "0644"
+
+- name: load pyenvrc in bashrc
+  lineinfile: >
+    dest="~{{ service_user }}/.bashrc"
+    state=present
+    create=yes
+    line="source ~{{ service_user }}/.pyenvrc"
+
+- name: install python version using pyenv
+  shell: "source ~{{ service_user }}/.pyenvrc && {{ venvs_path }}/bin/pyenv install"
+  args:
+    chdir: "{{ source_path }}"
+    executable: /bin/bash
+  # not ideal, but since we create base on .python-version file it's hard to check
+  ignore_errors: yes
+
+- name: create virtualenv using pyenv
+  shell: "echo {{ virtualenv_path }} && source ~{{ service_user }}/.pyenvrc && {{ venvs_path }}/bin/pyenv virtualenv {{ service_name }}"
+  args:
+    chdir: "{{ source_path }}"
+    executable: /bin/bash
+  # not ideal, creates does not seem to work (with symlink?)
+  ignore_errors: yes
