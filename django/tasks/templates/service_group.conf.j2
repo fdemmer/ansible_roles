@@ -10,7 +10,7 @@ directory = {{ install_path }}
 user = {{ service_user }}
 {% if use_gunicorn %}
 command = {{ virtualenv_path }}/bin/gunicorn
-    -c {{ install_path }}/gunicorn.py
+    -c {{ install_path }}/gunicorn.conf
     --error-logfile {{ service_log_path }}/gunicorn-error.log
     --access-logfile {{ service_log_path }}/gunicorn-access.log
     wsgi:application

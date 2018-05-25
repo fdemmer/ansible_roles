@@ -7,8 +7,8 @@
 
 - name: configure gunicorn
   template: >
-    src="gunicorn.py.j2"
-    dest="{{ install_path }}/gunicorn.py"
+    src="gunicorn.conf.j2"
+    dest="{{ install_path }}/gunicorn.conf"
     owner={{ service_user }}
     group={{ service_group }}
     mode=0644
