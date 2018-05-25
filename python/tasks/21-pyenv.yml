@@ -2,9 +2,11 @@
 # setup pyenv and install interpreter
 
 - name: install pyenv
+  become_user: 'root'
   git: repo=https://github.com/pyenv/pyenv.git dest={{ venvs_path }}
 
 - name: install pyenv-virtualenv
+  become_user: 'root'
   git: repo=https://github.com/pyenv/pyenv-virtualenv.git dest={{ venvs_path }}/plugins/pyenv-virtualenv
 
 - name: update pyenv directory owner

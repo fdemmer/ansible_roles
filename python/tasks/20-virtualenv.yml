@@ -2,6 +2,7 @@
 # choose python version and setup a service virtualenv
 
 - include: 21-pyenv.yml
+  become_user: "{{ service_user }}"
   when: use_pyenv
 
 - include: 22-python2.yml
