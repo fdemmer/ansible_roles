@@ -5,10 +5,10 @@
   when: use_pyenv
 
 - include: 22-python2.yml
-  when: not use_python3
+  when: not use_python3 and not use_pyenv
 
 - include: 23-python3.yml
-  when: use_python3
+  when: use_python3 and not use_pyenv
 
 - name: update pip and setuptools
   pip: >
