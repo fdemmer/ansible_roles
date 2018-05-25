@@ -7,19 +7,40 @@
 - name: install pyenv-virtualenv
   git: repo=https://github.com/pyenv/pyenv-virtualenv.git dest={{ venvs_path }}/plugins/pyenv-virtualenv
 
-- name: setup pyenv
+- name: update pyenv directory owner
+  become_user: 'root'
+  file: >
+    path={{ venvs_path }}
+    owner={{ service_user }}
+    group={{ service_group }}
+    recurse=yes
+
+- name: create pyenvrc
+  template:
+    src: "pyenvrc.j2"
+    dest: "~{{ service_user }}/.pyenvrc"
+    owner: "{{ service_user }}"
+  mode: "0644"
+
+- name: load pyenvrc in bashrc
   lineinfile: >
     dest="~{{ service_user }}/.bashrc"
     state=present
     create=yes
-    line="{{ item }}"
-  with_items:
-    - "export PYENV_ROOT=\\\"{{ venvs_path }}\\\""
-    - "export PATH=\\\"$PYENV_ROOT/bin:$PATH\\\""
-    - "eval \\\"$(pyenv init -)\\\""
-    - "eval \\\"$(pyenv virtualenv-init -)\\\""
+    line="source ~{{ service_user }}/.pyenvrc"
 
-#- name: install python version using pyenv
-#  command: virtualenv -p /usr/bin/python2 {{ virtualenv_path }}
-#  args:
-#    creates: "{{ virtualenv_path }}/bin/python2"
+- name: install python version using pyenv
+  shell: "source ~{{ service_user }}/.pyenvrc && {{ venvs_path }}/bin/pyenv install"
+  args:
+    chdir: "{{ source_path }}"
+    executable: /bin/bash
+  # not ideal, but since we create base on .python-version file it's hard to check
+  ignore_errors: yes
+
+- name: create virtualenv using pyenv
+  shell: "echo {{ virtualenv_path }} && source ~{{ service_user }}/.pyenvrc && {{ venvs_path }}/bin/pyenv virtualenv {{ service_name }}"
+  args:
+    chdir: "{{ source_path }}"
+    executable: /bin/bash
+  # not ideal, creates does not seem to work (with symlink?)
+  ignore_errors: yes
