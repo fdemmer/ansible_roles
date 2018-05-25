@@ -42,5 +42,9 @@ service_group: "root"
 # path to code root, where the django site module lives
 source_path: "/vagrant"
 
-venvs_path: "/opt/pyenv"
-virtualenv_path: "{{ venvs_path }}/versions/{{ service_name }}"
+venvs_path: "/var/virtualenvs"
+virtualenv_path: "{{ venvs_path }}/{{ service_name }}"
+
+# when using pyenv set something like this in the playbook:
+#venvs_path: "/opt/pyenv"
+#virtualenv_path: "{{ venvs_path }}/versions/{{ service_name }}"
