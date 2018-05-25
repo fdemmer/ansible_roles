@@ -46,3 +46,9 @@
     executable: /bin/bash
   # not ideal, creates does not seem to work (with symlink?)
   ignore_errors: yes
+
+- name: add PYENV_VERSION to .bashrc
+  lineinfile: >
+    dest="~{{ service_user }}/.bashrc"
+    line="export PYENV_VERSION={{ service_name }}"
+    state=present
