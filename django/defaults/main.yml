@@ -182,3 +182,4 @@ remote_tempfile: "{{ tempfile }}"
 local_tempfile: "{{ tempfile }}"
 target_tempfile: "{{ tempfile }}"
 target_itemsfile: "{{ tempfile }}.items"
+itemsfile_filter: []

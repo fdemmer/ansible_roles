@@ -3,7 +3,7 @@
 - name: create new database dump
   become: no
   #local_action: shell ssh {{ live_db_host }} "pg_dump -F t -O -U {{ live_db_user }} {{ live_db_name }} | gzip -c > {{ remote_tempfile }}"
-  local_action: shell ssh -o StrictHostKeyChecking=no {{ live_host_user }}@{{ live_db_host }} "pg_dump -Fc -f {{ remote_tempfile }} --no-owner --no-acl -U {{ live_db_user }} {{ live_db_name }}"
+  local_action: shell ssh -o StrictHostKeyChecking=no {{ live_host_user }}@{{ live_db_host }} "pg_dump -Fc -f {{ remote_tempfile }} --no-owner --no-acl -T 'spatial_ref_sys' -U {{ live_db_user }} {{ live_db_name }}"
   tags:
     - create_dump
     - import_database
@@ -36,6 +36,17 @@
   become: no
   command: pg_restore -l -f {{ target_itemsfile }} {{ target_tempfile }}
   when: local_itemsfile is undefined
+  tags:
+    - restore_dump
+    - import_database
+
+- name: filter itemsfile
+  become: no
+  lineinfile:
+    path: "{{ target_itemsfile }}"
+    state: absent
+    regexp: "{{ item }}"
+  with_items: "{{ itemsfile_filter }}"
   tags:
     - restore_dump
     - import_database
