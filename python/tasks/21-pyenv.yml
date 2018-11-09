@@ -22,7 +22,7 @@
     src: "pyenvrc.j2"
     dest: "~{{ service_user }}/.pyenvrc"
     owner: "{{ service_user }}"
-  mode: "0644"
+    mode: "0644"
 
 - name: load pyenvrc in bashrc
   lineinfile: >
