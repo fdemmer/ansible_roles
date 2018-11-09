@@ -15,8 +15,13 @@
   when: nginx_version_dev
 
 - name: install nginx
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
-  with_items:
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     - nginx
 
 - name: update access to nginx log directory

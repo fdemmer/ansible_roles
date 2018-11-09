@@ -2,8 +2,13 @@
 # install required tools and system wide libraries
 
 - name: install utilities
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
-  with_items:
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     # required to generate secret key
     - makepasswd
     # required for make/compilemessages
@@ -23,8 +28,13 @@
   when: support_django
 
 - name: install library headers for pillow
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
-  with_items:
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     - libjpeg-dev
     - libtiff-dev
     - zlib1g-dev
@@ -34,34 +44,59 @@
   when: support_pillow
 
 - name: install library headers for lxml
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
-  with_items:
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     - libxml2-dev
     - libxslt1-dev
     - zlib1g-dev
   when: support_lxml
 
 - name: install library headers for cryptography
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
-  with_items:
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     - libssl-dev
   when: support_cryptography
 
 - name: install library headers for mysql
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
-  with_items:
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     - libmysqlclient-dev
   when: support_mysql
 
 - name: install library headers for cffi support
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
-  with_items:
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     - libffi-dev
   when: support_cffi
 
 - name: install libraries for wasyprint
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
-  with_items:
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     - libcairo2
     - libpango1.0-0
     - libgdk-pixbuf2.0-0
@@ -69,7 +104,12 @@
   when: support_weasyprint
 
 - name: install enchant for sphinx spellcheck
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
-  with_items:
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     - enchant
   when: support_sphinx

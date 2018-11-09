@@ -2,16 +2,26 @@
 
 - name: install mscorefonts
   become_user: 'root'
-  apt: name={{ item }} state=latest update_cache=yes
-  with_items:
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     - ttf-mscorefonts-installer
   tags:
     - install_fonts
 
 - name: install required tools
   become_user: 'root'
-  apt: name={{ item }} state=latest update_cache=yes
-  with_items:
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     - cabextract
   tags:
     - install_fonts
