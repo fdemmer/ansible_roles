@@ -2,6 +2,7 @@
 service_name: "service"
 
 service_user: "root"
+service_user_password: "EENEBtXjZaPzs"  # root
 service_group: "root"
 
 locale: 'en_US.UTF-8'

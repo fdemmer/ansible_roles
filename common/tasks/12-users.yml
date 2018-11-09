@@ -8,6 +8,6 @@
 - name: make sure service user exists
   user: >
     name={{ service_user }}
-    password={{ service_user }}
+    password={{ service_user_password }}
     group={{ service_group }}
     shell=/bin/bash
