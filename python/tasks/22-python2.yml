@@ -3,8 +3,13 @@
 
 - name: install python2 headers
   become_user: 'root'
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
-  with_items:
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     - python-dev
 
 - name: create python2 virtualenv

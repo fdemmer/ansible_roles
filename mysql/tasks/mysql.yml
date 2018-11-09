@@ -2,8 +2,13 @@
 # setup mysql server
 
 - name: install mysql
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
-  with_items:
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     - mysql-server-5.5
     - libmysqlclient-dev
 
