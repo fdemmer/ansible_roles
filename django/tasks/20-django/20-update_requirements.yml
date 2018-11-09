@@ -9,13 +9,14 @@
 #
 
 - name: install pip-tools
-  pip: >
-    virtualenv="{{ virtualenv_path }}"
-    name={{ item }}
-    state=latest
-  with_items:
-    - "pip>=9.0.1"
-    - "pip-tools>=1.9.0"
+  pip:
+    state: latest
+    virtualenv: "{{ virtualenv_path }}"
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - "pip>=18.0"
+    - "pip-tools>=3.0.0"
   when: use_pip_compile
 
 - name: recompile requirements input
@@ -25,10 +26,10 @@
   when: use_pip_compile and not disabled_by_default
 
 - name: install django app requirements
-  pip: >
-    virtualenv="{{ virtualenv_path }}"
-    requirements="{{ install_path }}/{{ requirements }}"
-    extra_args="--exists-action w"
-    state=latest
+  pip:
+    state: latest
+    virtualenv: "{{ virtualenv_path }}"
+    extra_args: "--exists-action w"
+    requirements: "{{ install_path }}/{{ requirements }}"
   notify:
     - restart service group

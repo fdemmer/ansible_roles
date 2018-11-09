@@ -12,13 +12,14 @@
   when: use_python3 and not use_pyenv
 
 - name: update pip and setuptools
-  pip: >
-    virtualenv="{{ virtualenv_path }}"
-    name={{ item }}
-    state=latest
-  with_items:
-    - "pip>=9.0.1"
-    - "setuptools==28.2.0"
+  pip:
+    state: latest
+    virtualenv: "{{ virtualenv_path }}"
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - "pip>=18.0"
+    - "pip-tools>=3.0.0"
   when: not use_pyenv
 
 - name: configure virtualenv home directory
