@@ -3,13 +3,13 @@
 
 - include: 21-pyenv.yml
   become_user: "{{ service_user }}"
-  when: use_pyenv
+  when: use_pyenv|bool
 
 - include: 22-python2.yml
-  when: not use_python3 and not use_pyenv
+  when: not use_python3|bool and not use_pyenv|bool
 
 - include: 23-python3.yml
-  when: use_python3 and not use_pyenv
+  when: use_python3|bool and not use_pyenv|bool
 
 - name: update pip and setuptools
   pip:
@@ -20,7 +20,7 @@
     packages:
     - "pip>=18.0"
     - "pip-tools>=3.0.0"
-  when: not use_pyenv
+  when: not use_pyenv|bool
 
 - name: configure virtualenv home directory
   become_user: 'root'
@@ -29,7 +29,7 @@
     regexp=^WORKON_HOME={{ venvs_path }}
     line=WORKON_HOME={{ venvs_path }}
     state=present
-  when: not use_pyenv
+  when: not use_pyenv|bool
 
 - name: update virtualenv home directory owner
   become_user: 'root'
@@ -38,11 +38,11 @@
     owner={{ service_user }}
     group={{ service_group }}
     recurse=yes
-  when: not use_pyenv
+  when: not use_pyenv|bool
 
 - name: enable virtualenv on login
   lineinfile: >
     dest="~{{ service_user }}/.bashrc"
     line="source {{ virtualenv_path }}/bin/activate"
     state=present
-  when: not use_pyenv
+  when: not use_pyenv|bool
