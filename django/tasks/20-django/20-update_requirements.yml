@@ -15,8 +15,8 @@
     name: "{{ packages }}"
   vars:
     packages:
-    - "pip~=18.0"
-    - "pip-tools~=3.2.0"
+    - "pip"
+    - "pip-tools"
   when: use_pip_compile
 
 - name: recompile requirements input
