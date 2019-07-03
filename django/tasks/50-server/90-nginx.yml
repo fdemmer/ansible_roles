@@ -8,7 +8,7 @@
   notify:
    - restart nginx
 
-- name: configure nginx django site
+- name: configure nginx django/gunicorn site
   template: >
     src="nginx.conf.j2"
     dest="{{ nginx_config_path }}/sites-available/{{ service_name }}.conf"

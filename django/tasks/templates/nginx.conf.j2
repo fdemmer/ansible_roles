@@ -53,13 +53,20 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_redirect off;
-        {% if use_gunicorn %}
+{% if use_gunicorn %}
         proxy_pass http://django;
-        {% elif use_uwsgi %}
+{% elif use_uwsgi %}
         include uwsgi_params;
         uwsgi_pass django;
-        {% endif %}
+{% endif %}
     }
+
+{% if nginx_error_page %}
+    error_page 502 503 504 /maintenance.html;
+    location = /maintenance.html {
+        alias {{ static_path }}/maintenance.html;
+    }
+{% endif %}
 
     # https://mozilla.github.io/server-side-tls/ssl-config-generator/
     ssl_protocols TLSv1.2;
