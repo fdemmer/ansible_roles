@@ -3,6 +3,9 @@
 # choose release
 #
 # set to "distro" to get package included with distribution
-# other releases are: node_0.10, node_0.12, node_4.x, node_5.x, iojs_1.x, iojs_2.x, iojs_3.x
-# check https://github.com/nodesource/distributions#debinstall for details
-node_release: "node_5.x"
+# other releases are: node_8.x, node_10.x, node_11.x, node_12.x
+#
+# check for details:
+# - https://github.com/nodesource/distributions#debinstall
+# - https://github.com/nodejs/Release
+node_release: "node_10.x"
