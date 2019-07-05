@@ -138,7 +138,7 @@ sphinx_projects: []
 django_settings_module: "{{ service_name }}.settings"
 
 # settings structure, used on top of {{ install_path }}/{{ service_name }}
-write_local_settings: True
+write_local_settings: False
 secret_settings: "settings/secret.py"
 local_settings: "settings/local.py"
 
