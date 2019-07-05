@@ -17,7 +17,7 @@
     packages:
     - "pip"
     - "pip-tools"
-  when: use_pip_compile
+  when: use_pip_compile|bool
 
 - name: recompile requirements input
   command: >

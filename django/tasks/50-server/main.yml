@@ -5,16 +5,16 @@
 
 - include: 20-gunicorn.yml
   tags: gunicorn
-  when: use_gunicorn
+  when: use_gunicorn|bool
 
 - include: 21-uwsgi.yml
   tags: uwsgi
-  when: use_uwsgi
+  when: use_uwsgi|bool
 
 - include: 90-nginx.yml
   become_user: "root"
-  when: use_nginx
+  when: use_nginx|bool
 
 - include: 91-apache.yml
   become_user: "root"
-  when: use_apache
+  when: use_apache|bool

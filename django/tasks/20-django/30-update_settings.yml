@@ -8,7 +8,7 @@
 - name: determine database engine
   set_fact: >
     db_engine="{{ db_engine_postgis }}"
-  when: enable_postgis
+  when: enable_postgis|bool
 
 - name: configure django secret settings
   template: >
@@ -17,7 +17,7 @@
     owner={{ service_user }}
     group={{ service_group }}
     mode=0644
-  when: write_local_settings
+  when: write_local_settings|bool
   notify:
     - restart service group
 
@@ -28,7 +28,7 @@
     owner={{ service_user }}
     group={{ service_group }}
     mode=0644
-  when: write_local_settings
+  when: write_local_settings|bool
   notify:
     - restart service group
 

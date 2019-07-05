@@ -25,7 +25,7 @@
     - virtualenvwrapper
     # required for dependencies from git repositories
     - git
-  when: support_django
+  when: support_django|bool
 
 - name: install library headers for pillow
   apt:
@@ -41,7 +41,7 @@
     - libfreetype6-dev
     - liblcms2-dev
     - libjpeg8-dev
-  when: support_pillow
+  when: support_pillow|bool
 
 - name: install library headers for lxml
   apt:
@@ -54,7 +54,7 @@
     - libxml2-dev
     - libxslt1-dev
     - zlib1g-dev
-  when: support_lxml
+  when: support_lxml|bool
 
 - name: install library headers for cryptography
   apt:
@@ -65,7 +65,7 @@
   vars:
     packages:
     - libssl-dev
-  when: support_cryptography
+  when: support_cryptography|bool
 
 - name: install library headers for mysql
   apt:
@@ -76,7 +76,7 @@
   vars:
     packages:
     - libmysqlclient-dev
-  when: support_mysql
+  when: support_mysql|bool
 
 - name: install library headers for cffi support
   apt:
@@ -87,7 +87,7 @@
   vars:
     packages:
     - libffi-dev
-  when: support_cffi
+  when: support_cffi|bool
 
 - name: install libraries for wasyprint
   apt:
@@ -101,7 +101,7 @@
     - libpango1.0-0
     - libgdk-pixbuf2.0-0
     - shared-mime-info
-  when: support_weasyprint
+  when: support_weasyprint|bool
 
 - name: install enchant for sphinx spellcheck
   apt:
@@ -112,4 +112,4 @@
   vars:
     packages:
     - enchant
-  when: support_sphinx
+  when: support_sphinx|bool

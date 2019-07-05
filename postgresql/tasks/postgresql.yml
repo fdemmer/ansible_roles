@@ -3,11 +3,11 @@
 
 - name: add apt repository key
   apt_key: url={{ postgres_ppa_key }} state=present
-  when: postgres_version_dev
+  when: postgres_version_dev|bool
 
 - name: add apt repository
   apt_repository: repo="{{ postgres_ppa }}"
-  when: postgres_version_dev
+  when: postgres_version_dev|bool
 
 - name: install postgresql
   apt:

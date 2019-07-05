@@ -10,16 +10,16 @@ dependencies:
 
   # web servers
   - role: nginx
-    when: install_nginx
+    when: install_nginx|bool
   - role: apache
-    when: install_apache
+    when: install_apache|bool
 
   # databases
   - role: postgresql
-    when: install_postgresql
+    when: install_postgresql|bool
   - role: mysql
-    when: install_mysql
+    when: install_mysql|bool
   - role: redis
-    when: install_redis
+    when: install_redis|bool
   - role: phantomjs
-    when: install_phantomjs
+    when: install_phantomjs|bool

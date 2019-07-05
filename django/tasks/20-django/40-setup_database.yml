@@ -16,7 +16,7 @@
     name={{ db_name }}
     template='template0'
     state=present
-  when: use_postgresql
+  when: use_postgresql|bool
   tags: create_database
 
 - name: enable spatial extensions
@@ -36,7 +36,7 @@
     password={{ db_password }}
     priv=ALL
     role_attr_flags=INHERIT,CREATEDB,SUPERUSER
-  when: use_postgresql
+  when: use_postgresql|bool
   tags: create_database
 
 - name: configure pgpass for {{ service_user }}
@@ -49,5 +49,5 @@
     mode=0600
     state=present
     create=yes
-  when: use_postgresql
+  when: use_postgresql|bool
   tags: create_database

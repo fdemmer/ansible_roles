@@ -45,7 +45,7 @@
     virtualenv={{ virtualenv_path }}
     settings={{ django_settings_module }}
   tags: django_initialrevisions
-  when: use_reversion
+  when: use_reversion|bool
 
 - name: build html documentation
   shell: "source {{ virtualenv_path }}/bin/activate && make html"
@@ -53,7 +53,7 @@
     chdir: "{{ source_path }}/docs/{{ item }}"
     executable: "/bin/bash"
   with_items: "{{ sphinx_projects }}"
-  when: sphinx_projects
+  when: sphinx_projects|bool
   tags:
     - build_docs
 
@@ -65,7 +65,7 @@
     group="{{ service_group }}"
     state=link
   with_items: "{{ sphinx_projects }}"
-  when: sphinx_projects
+  when: sphinx_projects|bool
   tags:
     - build_docs
 

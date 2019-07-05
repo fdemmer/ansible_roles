@@ -12,7 +12,7 @@
 
 - name: add ppa:nginx/development
   apt_repository: repo="{{ nginx_ppa }}"
-  when: nginx_version_dev
+  when: nginx_version_dev|bool
 
 - name: install nginx
   apt:

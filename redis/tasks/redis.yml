@@ -3,7 +3,7 @@
 
 - name: add ppa:chris-lea/redis-server
   apt_repository: repo='ppa:chris-lea/redis-server'
-  when: redis_version_latest
+  when: redis_version_latest|bool
 
 - name: install redis-server
   apt:

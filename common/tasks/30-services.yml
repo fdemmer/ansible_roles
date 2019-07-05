@@ -6,7 +6,7 @@
     name=puppet
     state=stopped
     enabled=no
-  when: disable_puppet
+  when: disable_puppet|bool
   ignore_errors: yes
 
 - name: disable chef client
@@ -14,5 +14,5 @@
     name=chef-client
     state=stopped
     enabled=no
-  when: disable_chef
+  when: disable_chef|bool
   ignore_errors: yes

@@ -9,4 +9,4 @@
   tags:
     - postgresql
     - postgis
-  when: enable_postgis
+  when: enable_postgis|bool
