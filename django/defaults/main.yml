@@ -74,6 +74,8 @@ apache_config_path: "/etc/apache2"
 # dangerous defaults, use only in development
 nginx_autoindex_static_path: "on"
 nginx_autoindex_media_path: "on"
+# redirect all http requests to https/2
+nginx_redirect_https: True
 # show maintenance.html instead of error 50x
 nginx_error_page: False
 

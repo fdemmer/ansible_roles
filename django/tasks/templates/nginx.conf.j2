@@ -11,8 +11,19 @@ upstream django {
 {% endif %}
 }
 
+{% if nginx_redirect_https %}
 server {
     listen 80 default_server;
+    listen [::]:80 default_server;
+    return 302 https://$host$request_uri;
+}
+{% endif %}
+
+server {
+{% if not nginx_redirect_https %}
+    listen 80 default_server;
+    listen [::]:80 default_server;
+{% endif %}
     listen 443 ssl{% if nginx_version_dev %} http2{% endif %};
     listen [::]:443 ssl{% if nginx_version_dev %} http2{% endif %};
 
@@ -23,7 +34,7 @@ server {
     {% if nginx_version_dev %}ssl_session_tickets off;{% endif %}
 
     gzip_vary on;
-    gzip_types text/plain text/css application/xml application/javascript application/json;
+    gzip_types text/plain text/css image/svg+xml application/xml application/javascript application/json;
 
     client_max_body_size 30m;
 
