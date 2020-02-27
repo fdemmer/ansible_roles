@@ -36,7 +36,7 @@
   args:
     chdir: "{{ source_path }}"
     executable: /bin/bash
-  # not ideal, but since we create base on .python-version file it's hard to check
+  # not ideal, but since we create based on .python-version file it's hard to check
   ignore_errors: yes
 
 - name: create virtualenv using pyenv
