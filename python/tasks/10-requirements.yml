@@ -15,10 +15,12 @@
     - gettext
     # required to build anything
     - build-essential
-    # readline, sqlite and bz2 support
+    # readline, sqlite, bz2, zlib support
     - libreadline-dev
     - libsqlite3-dev
     - libbz2-dev
+    - zlib1g-dev
+    - liblzma-dev
     # to install anything at all
     - python-pip
     # easy virtualenv management
