@@ -8,5 +8,5 @@
     name: "{{ packages }}"
   vars:
     packages:
-    - postgresql-{{ postgres_version }}-postgis-2.4
-    - postgresql-{{ postgres_version }}-postgis-scripts
+    - postgresql-{{ postgres_version }}-postgis-{{ postgis_version }}
+    - postgresql-{{ postgres_version }}-postgis-{{ postgis_version }}-scripts
