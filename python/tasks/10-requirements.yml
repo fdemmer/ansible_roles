@@ -9,12 +9,25 @@
     name: "{{ packages }}"
   vars:
     packages:
+    # required to build anything
+    - build-essential
+    # other basic/useful stuff
+    - direnv
+    - git
+    - jq
+
+- name: install django related
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
     # required to generate secret key
     - makepasswd
     # required for make/compilemessages
     - gettext
-    # required to build anything
-    - build-essential
     # readline, sqlite, bz2, zlib support
     - libreadline-dev
     - libsqlite3-dev
@@ -25,8 +38,6 @@
     - python-pip
     # easy virtualenv management
     - virtualenvwrapper
-    # required for dependencies from git repositories
-    - git
   when: support_django|bool
 
 - name: install library headers for pillow
