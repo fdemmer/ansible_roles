@@ -113,6 +113,7 @@
     - libcairo2
     - libpango1.0-0
     - libgdk-pixbuf2.0-0
+    - poppler-utils
     - shared-mime-info
   when: support_weasyprint|bool
 
