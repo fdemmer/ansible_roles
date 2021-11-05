@@ -3,9 +3,9 @@
 # choose release
 #
 # set to "distro" to get package included with distribution
-# other releases are: node_8.x, node_10.x, node_11.x, node_12.x
+# other releases are: node_12.x, node_14.x, node_16.x, ...
 #
 # check for details:
 # - https://github.com/nodesource/distributions#debinstall
 # - https://github.com/nodejs/Release
-node_release: "node_10.x"
+node_release: "node_16.x"
