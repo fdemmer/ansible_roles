@@ -1,21 +1,20 @@
 ---
 # setup pyenv and install interpreter
 
-- name: install pyenv
+- name: create pyenv directory
   become_user: 'root'
+  file:
+    state: directory
+    mode: "0755"
+    path: "{{ venvs_path }}"
+    owner: "{{ service_user }}"
+    group: "{{ service_group }}"
+
+- name: install pyenv
   git: repo=https://github.com/pyenv/pyenv.git dest={{ venvs_path }}
 
 - name: install pyenv-virtualenv
-  become_user: 'root'
   git: repo=https://github.com/pyenv/pyenv-virtualenv.git dest={{ venvs_path }}/plugins/pyenv-virtualenv
-
-- name: update pyenv directory owner
-  become_user: 'root'
-  file: >
-    path={{ venvs_path }}
-    owner={{ service_user }}
-    group={{ service_group }}
-    recurse=yes
 
 - name: create pyenvrc
   template:
