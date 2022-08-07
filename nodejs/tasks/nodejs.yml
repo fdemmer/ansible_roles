@@ -24,3 +24,6 @@
   vars:
     packages:
     - nodejs
+
+- name: enable corepack
+  command: corepack enable
