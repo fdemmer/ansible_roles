@@ -21,6 +21,7 @@ command = {{ virtualenv_path }}/bin/uwsgi
 {% endif %}
 stdout_logfile = {{ supervisor_log_path }}/%(group_name)s-%(program_name)s.log
 redirect_stderr = true
+autostart = true
 
 {% if use_celery %}
 [program:celery]
@@ -37,4 +38,5 @@ command = {{ virtualenv_path }}/bin/celery worker
     -B
 stdout_logfile = {{ supervisor_log_path }}/%(group_name)s-%(program_name)s.log
 redirect_stderr = true
+autostart = true
 {% endif %}
