@@ -38,10 +38,12 @@ server {
 
     client_max_body_size 30m;
 
+{% if nginx_static_files %}
     location ^~ /static  {
         alias {{ static_path }}/;
         autoindex {{ nginx_autoindex_static_path }};
     }
+{% endif %}
 
     location ^~ /media  {
         alias {{ media_path }}/;

@@ -78,6 +78,8 @@ nginx_autoindex_media_path: "on"
 nginx_redirect_https: True
 # show maintenance.html instead of error 50x
 nginx_error_page: False
+# serve requests to /static from static_path
+nginx_static_files: True
 
 # gunicorn
 gunicorn_host: "0.0.0.0"
